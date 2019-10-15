@@ -1,0 +1,39 @@
+<?php
+
+$_item = $this->getItem();
+$_helper = $this->helper('catalog/output');
+if ($_item):
+?>
+    <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" class="product-image" style="height: 155px">
+        <img src="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(155); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" />
+    </a>
+
+    <?php if(!$_item->isSaleable()): ?>
+    <p class="sold-out"><?php echo $this->__("Sold Out")?></p>
+<?php endif; ?>
+
+        <h2 class="product-name"><a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_item, $_item->getName(), 'name') ?></a></h2>
+        <?php if (Mage::getStoreConfig('featuredproducts/general/price_visible')): ?>
+        <?php echo $this->getPriceHtml($_item, true, '-upsell') ?>
+    <?php endif; ?>
+    <?php if (!$_item->isSaleable() &&  $_item->getTypeId() === 'simple'):?>
+        <div class="product-alert">
+            <p class="mupsell_products mess">
+                <a class="color-blue hul color-red csp bttop" rel="<?php echo $_item->getId(); ?>"  <?php echo (!Mage::getSingleton('customer/session')->isLoggedIn()) ? '': 'onclick="linkToNotify()"'; ?> >
+                    <?php echo __("+ Notify when back in stock") ?>
+                </a>
+            </p>
+        </div>
+    <?php elseif($_item->getTypeId() === 'bundle' || $_item->getTypeId() === 'configurable' || $_item->getTypeId() === 'grouped'):?>
+        <a class="color-blue c-09c hul" href="<?php echo $_item->getProductUrl() ?>">
+            <?php echo $this->__("+ Select Options")?>
+        </a>
+    <?php elseif ($_item->getTypeId() === 'simple' && $_item->isSaleable()): ?>
+        <a class="color-blue c-09c hul csp" onclick='ajaxCartProcessing("<?php echo Mage::helper('checkout/cart')->getAddUrl($_item) ?>","<?php echo $_item->getProductUrl()?>")'>
+            <?php echo $this->__("+ Add to Cart")?>
+        </a>
+    <?php endif; ?>
+        <?php if($_item->getRatingSummary()): ?>
+        <?php echo $this->getReviewsSummaryHtml($_item, 'short') ?>
+    <?php endif; ?>
+<?php endif;?>

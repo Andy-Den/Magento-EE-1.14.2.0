@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+
+        <reference name="product_list_toolbar"><action method="disableParamsMemorizing" /></reference>
+    </default>
+    <catalog_category_default>
+        <reference name="product_list_toolbar"><action method="disableParamsMemorizing" /></reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="product_list_toolbar"><action method="disableParamsMemorizing" /></reference>
+    </catalog_category_layered>
+    <cms-index-index>
+        <reference name="product_list_toolbar"><action method="disableParamsMemorizing" /></reference>
+    </cms-index-index>
+    <cms-page>
+        <reference name="product_list_toolbar"><action method="disableParamsMemorizing" /></reference>
+    </cms-page>
+    <cms-index-noroute>
+        <reference name="product_list_toolbar"><action method="disableParamsMemorizing" /></reference>
+    </cms-index-noroute>
+
+    <reference name="header">
+        <action method="unsetChild"><name>top.links</name></action>
+    </reference>
+
+
+</layout>

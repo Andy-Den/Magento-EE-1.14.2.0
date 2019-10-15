@@ -1,0 +1,97 @@
+<div class="wrap_home_page">
+    <div class="overflowclear">
+        <div class="f-left left_content_home">
+            <!--<h3>Shop by brands</h3>-->
+            <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('shop-by-brands')->toHtml(); ?>
+            <div id="list_brands_home">
+                <ul class="list_brands_home">
+                    <?php  $orginalcollection = Mage::helper('brands/data')->getBrands();
+                    foreach ($orginalcollection as $brand) {
+                        if($brand['filler'] == 1):
+                        ?>
+                        <li><a href="<?php echo $brand['url'] ?>"><?php echo $brand['title'] ?></a></li>
+                    <?php
+                            endif;
+                        } ?>
+                    <li><a href="<?php echo $this->getUrl('brands-we-carry'); ?>" class="color-blue">
+                        <p><?php echo __("See All Brands") ?></p></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="cl mb15"></div>
+            <?php
+            $promotionBlock = Mage::getModel('cms/block')->load('pupsik_left_menu_promotion');
+            $othersBlock = Mage::getModel('cms/block')->load('pupsik_left_menu_others');
+            ?>
+            <h3>
+                <?php echo $promotionBlock->getTitle(); ?>
+            </h3>
+            <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_left_menu_promotion')->toHtml(); ?>
+            <div class="cl mb15"></div>
+            <h3>
+                <?php echo $othersBlock->getTitle(); ?>
+            </h3>
+            <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_left_menu_others')->toHtml(); ?>
+        </div>
+        <div class="f-right right_content_home">
+            <div class="home_banner">
+                <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_top_banner')->toHtml();
+                ?>
+            </div>
+            <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_services')->toHtml();
+            ?>
+            <div class="featured_products">
+                <?php //echo $this->getChildHtml('featured_products'); ?>
+                <?php echo Mage::app()->getLayout()->createBlock('featuredproducts/product_list')->setTemplate('inchoo/featuredproducts/home-list.phtml')->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+    <div class="wrap_featured_brands overflowclear">
+        <div class="favourite_brands overflowclear">
+            <h3 class="featured_title">
+                <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_banner_title_favourite_brands')->toHtml(); ?>
+            </h3>
+
+            <div class="see_all overflowclear"><a href="<?php echo $this->getUrl('brands-we-carry'); ?>">
+                    <p><?php echo __("See All >") ?></p></a></div>
+            <?php
+            $brand_count = 0;
+            shuffle($orginalcollection);
+            foreach ($orginalcollection as $brand) {
+                if ($brand['filler'] == 1 && $brand_count < 6) {
+                    ?>
+                    <a href="<?php echo $brand['url'] ?>"><img
+                            src="<?php echo Mage::helper('brands/data')->getBrandImageUrl($brand['image']) ?>"
+                            alt="<?php echo $brand['title'] ?>"/></a>
+                    <?php $brand_count++;
+                }
+            } ?>
+        </div>
+    </div>
+    <div class="bestseller_products">
+        <?php echo Mage::app()->getLayout()->createBlock('catalog/product_bestseller')->setTemplate('inchoo/featuredproducts/home-list2.phtml')->toHtml(); ?>
+    </div>
+    <div class="banners_bottom overflowclear">
+        <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_middle_banner')->toHtml();
+        ?>
+    </div>
+    <div class="overflowclear new_products">
+        <?php echo Mage::app()->getLayout()->createBlock('catalog/product_new')->setTemplate('inchoo/featuredproducts/home-list3.phtml')->toHtml(); ?>
+    </div>
+    <div class="featured_in overflowclear">
+        <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_bottom_banner')->toHtml(); ?>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--<script type="text/javascript">-->
+<!--    jQuery(document).ready(function () {-->
+<!--        jQuery("#list_brands_home").readmore();-->
+<!--    });-->
+<!--</script>-->

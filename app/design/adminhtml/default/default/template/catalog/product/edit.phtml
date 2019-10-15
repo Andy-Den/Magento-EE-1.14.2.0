@@ -1,0 +1,174 @@
+<script type="text/javascript"
+        src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>jquery/jquery.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery(".adminhtml-catalog-product-edit #messages .messages li:contains('Integrity constraint violation')").replaceWith("<li class='success-msg'><ul><li><span>The product has been saved.</span></li></ul></li>");
+        jQuery(setTimeout(
+            function () {
+                jQuery(".adminhtml-catalog-product-edit .main-col-inner #messages").css("display", "block");
+            }
+        ), 2000);
+    });
+</script>
+<?php
+$uri = $_SERVER['REQUEST_URI'];
+$configurable = '';
+$segment = explode("/", $uri);
+$new_product = '';
+$catalog_product = '';
+foreach ($segment as $params) {
+    if ($params == 'new') {
+        $new_product = 'new';
+
+    }
+    if ($params == 'configurable') {
+        $configurable = 'configurable';
+
+    }
+    if ($params == 'catalog_product') {
+        $catalog_product = 'catalog_product';
+    }
+
+}
+?>
+<input id="new_product" value="<?php echo $new_product; ?>" type="hidden">
+<input id="catalog_product" value="<?php echo $catalog_product; ?>" type="hidden">
+
+<div class="content-header">
+    <h3 class="icon-head head-products"><?php echo $this->getHeader() ?></h3>
+
+    <p class="content-buttons form-buttons"><?php echo $this->getBackButtonHtml() ?>
+        <?php echo $this->getCancelButtonHtml() ?>
+        <?php if ($this->getProductId()): ?>
+            <?php echo $this->getDeleteButtonHtml() ?>
+            <?php if ($this->getProductSetId() && $this->getIsConfigured()): ?>
+                <?php echo $this->getDuplicateButtonHtml() ?>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if ($this->getProductSetId() && $this->getIsConfigured()): ?>
+            <?php echo $this->getSaveButtonHtml() ?>
+            <?php echo $this->getSaveAndEditButtonHtml() ?>
+        <?php endif; ?>
+    </p>
+</div>
+<form action="<?php echo $this->getSaveUrl() ?>" method="post" id="product_edit_form" enctype="multipart/form-data">
+    <?php echo $this->getBlockHtml('formkey') ?>
+    <div style="display:none"></div>
+</form>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#simple_product_sku_autogenerate").attr('checked', false);
+    });
+    var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    var today = month + "/" + day + "/" + year;
+    if (jQuery('#new_product').val() == 'new' && jQuery('#catalog_product').val() == 'catalog_product') {
+        jQuery('#product_website_1').prop("checked", true);
+        jQuery('#inventory_stock_availability option[value=1]').attr('selected', 'selected');
+        jQuery('#weight').val('1');
+        jQuery('#status option[value=2]').attr('selected', 'selected');
+        jQuery('#news_from_date').val(today);
+        jQuery('#tax_class_id option[value=2]').attr('selected', 'selected');
+
+    }
+    jQuery('#simple_product_status option[value=1]').attr('selected', 'selected');
+    jQuery('#simple_product_visibility option[value=1]').attr('selected', 'selected');
+    jQuery('#simple_product_name').prop("disabled", false);
+    jQuery('#simple_product_sku').prop("disabled", false);
+
+    //<![CDATA[
+    var productTemplateSyntax = /(^|.|\r|\n)({{(\w+)}})/;
+    var productForm = new varienForm('product_edit_form', '<?php echo $this->getValidationUrl() ?>');
+    productForm._processValidationResult = function (transport) {
+        var response = transport.responseText.evalJSON();
+        if (response.error) {
+            if (response.attribute && $(response.attribute)) {
+                $(response.attribute).setHasError(true, productForm);
+                Validation.ajaxError($(response.attribute), response.message);
+                if (!Prototype.Browser.IE) {
+                    $(response.attribute).focus();
+                }
+            }
+            else if ($('messages')) {
+                $('messages').innerHTML = '<ul class="messages"><li class="error-msg"><ul><li>' + response.message + '</li></ul></li></ul>';
+            }
+        }
+        else {
+            productForm._submit();
+        }
+    };
+    function saveAndContinueEdit(urlTemplate) {
+        var template = new Template(urlTemplate, productTemplateSyntax);
+        var url = template.evaluate({tab_id: product_info_tabsJsTabs.activeTab.id});
+        productForm.submit(url);
+    }
+    function setSettings(urlTemplate, setElement, typeElement) {
+        var template = new Template(urlTemplate, productTemplateSyntax);
+        setLocation(template.evaluate({attribute_set: $F(setElement), type: $F(typeElement)}));
+    }
+
+    function setSuperSettings(urlTemplate, attributesClass, validateField) {
+        var attributesFields = $$('.' + attributesClass);
+        var attributes = Form.serializeElements(attributesFields, true).attribute;
+        if (typeof attributes == 'string') {
+            attributes = [attributes];
+        }
+
+        if (!attributes) {
+            $(validateField).value = 'no-attributes';
+        } else {
+            $(validateField).value = 'has-attributes';
+        }
+
+        if (productForm.validator.validate()) {
+            var template = new Template(urlTemplate, productTemplateSyntax);
+            var url = template.evaluate({
+                attributes: encode_base64(attributes.join(',')).replace(new RegExp('/', 'g'), '%2F').replace(new RegExp('=', 'g'), '%3D')
+            });
+            setLocation(url);
+        }
+    }
+
+    function checkMaxLength(Object, MaxLen) {
+        if (Object.value.length > MaxLen - 1) {
+            Object.value = Object.value.substr(0, MaxLen);
+        }
+        return 1;
+    }
+
+    Event.observe(window, 'load', function () {
+        var objName = '<?php echo $this->getSelectedTabId() ?>';
+        if (objName) {
+            obj = $(objName);
+            //IE fix (bubbling event model)
+            product_info_tabsJsTabs.setSkipDisplayFirstTab();
+            product_info_tabsJsTabs.showTabContent(obj);
+        }
+        Product.AttributesBridge.setTabsObject(product_info_tabsJsTabs);
+    });
+
+    Validation.addAllThese([
+        ['validate-super-product-attributes', '<?php echo Mage::helper('core')->jsQuoteEscape(Mage::helper('catalog')->__('Please select one or more attributes.')) ?>', function (v) {
+            return (v != "no-attributes");
+        }]]);
+    //]]>
+</script>
+
+
+<?php //if($new_product=="new" && $configurable=="configurable"): ?>
+<!--<script type="text/javascript">-->
+<!--    jQuery(document).ready(function () {-->
+<!--        jQuery('#inventory_use_config_manage_stock').attr('checked', false);-->
+<!--        jQuery(setTimeout(function () {-->
+<!--            jQuery("#inventory_use_config_manage_stock").prop("disabled", false);-->
+<!--            jQuery("#inventory_use_config_manage_stock").removeAttr("disabled");-->
+<!--            jQuery ("#inventory_manage_stock > option[value=" + 0 + "]").attr("selected",true);-->
+<!---->
+<!--        }), 500);-->
+<!--    });-->
+<!--</script>-->
+<?php //endif; ?>

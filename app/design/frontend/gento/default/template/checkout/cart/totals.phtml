@@ -1,0 +1,67 @@
+<?php if ($this->canApplyMsrp()): ?>
+    <div
+        class="cart-msrp-totals"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></div>
+<?php else: ?>
+    <h2 class="total-header-title"><?php echo $this->__("Order Summary") ?></h2>
+    <table id="shopping-cart-totals-table">
+        <col/>
+        <col width="60"/>
+        <tbody>
+        <?php echo $this->renderTotals(); ?>
+        <tr class="free_shipping_text">
+            <td colspan="2">
+                <?php
+                $cart_item = Mage::getModel('checkout/cart')->getQuote();
+                $shipping_fee = $cart_item->getShippingAddress()->getShippingInclTax();
+
+                $current = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
+                $grandTotal = $this->helper('checkout/cart')->getQuote()->getGrandTotal();
+
+                $shippingLeft = $current - $grandTotal + $shipping_fee;
+                if ($shippingLeft < 0) $mess = "";
+                else $mess = $this->__("You are ") . Mage::helper('core')->currency($shippingLeft, true, false) . $this->__(" away from Free Shipping");
+                ?>
+                <div class="overflowclear free_shipping_text"><?php echo $mess; ?>
+
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <?php echo $this->getChildHtml('coupon') ?>
+    <?php echo $this->getChildHtml('giftcards') ?>
+    <?php if (!$this->hasError()): ?>
+        <ul class="checkout-types">
+            <?php foreach ($this->getMethods('methods') as $method): ?>
+                <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                    <li><?php echo $methodHtml; ?></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+    <div class="total_line">
+        <?php echo __("Total:") ?>
+        <span
+            class="proceed-price"><?php echo $this->helper('core')->formatPrice($this->getQuote()->getGrandTotal(), false) ?></span>
+    </div>
+    <?php
+    $tax = $this->getTax();
+    if ($tax !== null) {
+        ?>
+        <div class="total_line total_line2">
+            <?php echo $tax->getData('title'); ?>
+            <span class="proceed-price"><?php echo $this->helper('core')->formatPrice($tax->getData('value'), false); ?></span>
+        </div>
+    <?php } ?>
+<?php endif; ?>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var select_text = jQuery("#shipping-zip-form select option:selected").text();
+        if (select_text != "Singapore") {
+            jQuery(".free_shipping_text").addClass("display_none");
+        }
+        else {
+            jQuery(".free_shipping_text").removeClass("display_none");
+        }
+    });
+</script>

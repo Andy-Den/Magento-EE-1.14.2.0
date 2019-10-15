@@ -1,0 +1,123 @@
+<?php
+$current_url = Mage::helper('core/url')->getCurrentUrl();
+if($current_url=="https://www.pupsikstudio.com/checkout/cart/"){
+?>
+<script type="text/javascript">
+   window.location.href = "http://www.pupsikstudio.com/checkout/cart/";
+</script>
+<?php } ?>
+
+<script type="text/javascript">window.addEventListener('load', function (e) {
+
+        window.applicationCache.addEventListener('updateready', function (e) {
+            if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+                // Browser downloaded a new app cache.
+                // Swap it in and reload the page to get the new hotness.
+                window.applicationCache.swapCache();
+                if (confirm('A new version of this site is available. Load it?')) {
+                    window.location.reload();
+                }
+            } else {
+                // Manifest didn't changed. Nothing new to server.
+            }
+        }, false);
+
+    }, false);</script>
+<div class="top-cart">
+    <!--    <script type="text/javascript" src="js.js?v=--><?php //echo  rand() ; ?><!--"></script>-->
+
+    <?php $_cartQty = $this->getSummaryCount(); ?>
+    <?php if ($_cartQty > 0): ?>
+        <?php $_myCart = $this->__('My Cart (%s)', '<span>' . $_cartQty . '</span>') ?>
+    <?php else: ?>
+        <?php $_myCart = $this->__('My Cart (%s)', '<span>0</span>') ?>
+    <?php endif ?>
+
+    <?php if ($this->getIsLinkMode() || !$this->getIsNeedToDisplaySideBar()): ?>
+        <div class="block-title no-items">
+            <ul class="links cart-link">
+<!--                <li><a href="--><?php //echo $this->getUrl('checkout/cart', array('_secure'=>true)); ?><!--">--><?php //echo $_myCart ?><!--</a></li>-->
+                <li><a href="<?php echo $this->getUrl('checkout/cart'); ?>"><?php echo $_myCart ?></a></li>
+            </ul>
+        </div>
+    <?php else: ?>
+        <div class="block-title<?php if (!$_cartQty) {
+            echo(' no-items');
+        } ?>">
+            <a href="<?php echo $this->getUrl('checkout/cart'); ?>">
+                <div class="btn_view_cart"></div>
+                <!--            <img src="-->
+                <?php //echo $this->getSkinUrl('images/view_cart.png') ?><!--" alt="view_cart"/>-->
+            </a>
+        </div>
+        <div id="topCartContent" class="block-content" style="display:none">
+            <div class="inner-wrapper"><?php // extra div to smooth slideUp and slideDown ?>
+                <?php $_items = $this->getRecentItems() ?>
+                <?php if (count($_items)): ?>
+                    <p class="block-subtitle">
+                        <span onclick="Enterprise.TopCart.hideCart()"
+                              class="close-btn"><?php echo $this->__('Close'); ?></span>
+                        <?php echo $this->__('Recently added item(s)') ?>
+                    </p>
+                    <ol id="mini-cart" class="mini-products-list">
+                        <?php foreach ($_items as $_item): ?>
+                            <?php echo $this->getItemHtml($_item) ?>
+                        <?php endforeach; ?>
+                    </ol>
+                    <script type="text/javascript">decorateList('mini-cart', 'none-recursive')</script>
+                <?php else: ?>
+                    <p class="block-subtitle">
+                        <span onclick="Enterprise.TopCart.hideCart()"
+                              class="close-btn"><?php echo $this->__('Close'); ?></span>
+                        <?php echo $this->__('Recently added item(s)') ?>
+                    </p>
+                    <p class="cart-empty">
+                        <?php echo $this->__('You have no items in your shopping cart.') ?>
+                    </p>
+                    <?php if ($this->getCartEmptyMessage()): ?>
+                    <p class="cart-empty cart-empty-message"><?php echo $this->getCartEmptyMessage(); ?></p>
+                <?php endif; ?>
+                <?php endif ?>
+                <?php if ($_cartQty || $this->getAllowCartLink()): ?>
+                    <?php $isPossibleOnepageCheckout = $_cartQty && $this->isPossibleOnepageCheckout() ?>
+                    <?php if ($isPossibleOnepageCheckout): ?>
+                        <p class="subtotal">
+                            <?php if ($this->canApplyMsrp()): ?>
+                                <span
+                                    class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                            <?php else: ?>
+                                <span
+                                    class="label"><?php echo $this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?><?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?> / <?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?><?php echo Mage::helper('tax')->getIncExcText(true) ?><?php endif; ?>
+                            <?php endif; ?>
+                        </p>
+                    <?php endif ?>
+                    <div class="actions overflowclear">
+
+                        <button class="button btn-checkout view-cart-link"
+                                onclick="setLocation('<?php echo $this->getUrl('checkout/cart'); ?>')">
+                            <span><span>SHOPPING CART</span></span>
+                        </button>
+                    </div>
+                <?php endif ?>
+            </div>
+        </div>
+    <?php $_SESSION['cart_item'] = Mage::helper('checkout/cart')->getCart()->getItemsCount(); ?>
+        <script type="text/javascript" src="<?php echo $this->getJsUrl('jquery/jquery.sticky.js') ?>"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                Enterprise.TopCart.initialize('topCartContent');
+                jQuery("#topCartContent").sticky({topSpacing: 0});
+                // Below can be used to show minicart after item added
+                <?php
+                if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+                AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+                   ?>
+                Enterprise.TopCart.showCart(4);
+                jQuery(".total_count_cart").text(<?php echo $_SESSION['cart_item']; ?>);
+                <?php
+            }
+            ?>
+            })
+        </script>
+    <?php endif; ?>
+</div>

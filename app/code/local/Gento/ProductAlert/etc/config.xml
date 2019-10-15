@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Gento_ProductAlert>
+            <version>0.1.0</version>
+        </Gento_ProductAlert>
+    </modules>
+    <frontend>
+        <routers>
+            <productalert>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Gento_ProductAlert before="Mage_ProductAlert">Gento_ProductAlert</Gento_ProductAlert>
+                    </modules>
+                </args>
+            </productalert>
+        </routers>
+    </frontend>
+</config>

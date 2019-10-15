@@ -1,0 +1,55 @@
+<div class="header-container">
+    <div class="header-panel marginauto">
+        <ul class="f-right wrap_cart_header">
+            <li class="total_cart_item overflowclear">
+                <span><?php echo Mage::helper('checkout/cart')->getCart()->getItemsCount(); ?> </span>
+                <strong>items</strong>
+            </li>
+            <li>
+                <a href="<?php echo $this->getUrl('checkout/cart') ?>">
+                    <img src="<?php echo $this->getSkinUrl('images/view_cart.png') ?>" alt="view_cart"/>
+                </a>
+            </li>
+        </ul>
+        <ul class="list_menu_top f-right">
+            <?php if (!Mage::helper('customer')->isLoggedIn()): ?>
+                <li><a href="<?php echo $this->getUrl('customer/account/login/') ?>">Login </a></li>
+            <?php else : ?>
+                <li><a href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>">Logout </a></li>
+            <?php endif; ?>
+            <li><a href="<?php echo $this->getUrl('customer/account/'); ?>">My Account </a></li>
+            <li><a href="<?php echo $this->getUrl('shipping-delivery') ?>">Shipping & Delivery</a></li>
+            <li><a href="<?php echo $this->getUrl('faq') ?>">FAQ </a></li>
+            <li><a href="<?php echo $this->getUrl('blog') ?>">Blog </a></li>
+            <li><a href="<?php echo $this->getUrl('order-tracking') ?>">Order Tracking </a></li>
+            <li class="no-bg"><a href="<?php echo $this->getUrl('contacts') ?>"> Contact Us </a></li>
+            <li class="no-bg hotline"> 1300 57 88 33</li>
+        </ul>
+        <div class="free_delivery f-right">
+            <span>FREE 2-DAY DELIVERY </span> or faster on <span> S$49+</span>
+        </div>
+    </div>
+    <div class="header marginauto">
+        <div class="branding">
+            <h1 class="logo f-left">
+                <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                    <img src="<?php echo $this->getSkinUrl('images/logo.png') ?>"
+                         alt="<?php echo $this->getLogoAlt() ?>"/>
+                </a>
+            </h1>
+
+            <div class="quick-access f-right">
+                <div class="wrap_top_search f-left">
+                    <?php echo $this->getChildHtml('topSearch'); ?>
+                </div>
+                <ul class="f-right money_back">
+                    <li>Best Prices Online</li>
+                    <li>Buy with Confidence</li>
+                    <li><img src="<?php echo $this->getSkinUrl('images/price_matching.png'); ?>" alt="img"/></li>
+                    <li><img src="<?php echo $this->getSkinUrl('images/30daysreturn.png'); ?>" alt="img"/></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getChildHtml('topMenu') ?>
+</div>

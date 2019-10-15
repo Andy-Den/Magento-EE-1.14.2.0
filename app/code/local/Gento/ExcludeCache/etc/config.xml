@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gento_ExcludeCache>
+            <version>0.1.0</version>
+        </Gento_ExcludeCache>
+    </modules>
+    <global>
+        <models>
+            <gento_excludecache>
+                <class>Gento_ExcludeCache_Model</class>
+                <resourceModel>gento_excludecache_resource</resourceModel>
+            </gento_excludecache>
+            <gento_excludecache_resource>
+                <class>Gento_ExcludeCache_Model_Resource</class>
+            </gento_excludecache_resource>
+        </models>
+        <blocks>
+            <gento_excludecache>
+                <class>Gento_ExcludeCache_Block</class>
+            </gento_excludecache>
+        </blocks>
+        <helpers>
+            <gento_excludecache>
+                <class>Gento_ExcludeCache_Helper</class>
+            </gento_excludecache>
+        </helpers>
+
+    </global>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<config>
+
+
+    <modules>
+        <Gento_ReCaptcha>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Gento_ReCaptcha>
+    </modules>
+</config>

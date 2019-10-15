@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Inchoo_PackingSlips>
+            <version>0.1.0</version>
+        </Inchoo_PackingSlips>
+    </modules>
+    <global>
+        <models>
+            <sales>
+                <rewrite>
+                    <order_pdf_shipment>Inchoo_PackingSlips_Model_Order_Pdf_Shipment</order_pdf_shipment>
+                </rewrite>
+            </sales>
+        </models>
+    </global>
+</config>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Devweb_Packslip>
+			<version>0.1.0</version>
+		</Devweb_Packslip>
+	</modules>
+	<global>	
+		<models>
+			<packslip>
+				<class>Devweb_Packslip_Model</class>
+			</packslip>
+		</models>
+	</global>
+	<admin>
+		<routers>
+			<adminhtml>
+				<args>
+					<modules>
+						<packslip before="Mage_Adminhtml">Devweb_Packslip</packslip>
+					</modules>
+				</args>
+			</adminhtml>
+		</routers>
+	</admin>
+	<adminhtml>
+		<events>
+			<adminhtml_block_html_before>
+				<observers>
+					<packslip_adminhtml_block_html_before>
+						<type>singleton</type>
+						<class>packslip/observer</class>
+						<method>addMassAction</method>
+					</packslip_adminhtml_block_html_before>
+				</observers>
+			</adminhtml_block_html_before>
+		</events>		
+	</adminhtml>
+</config>

@@ -1,0 +1,101 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php /* @var $this Mage_ProductAlert_Block_Product_View */ ?>
+
+
+<div class="product-alert">
+   <!-- <p class="mess">
+        <a class="hul color-red csp" <?php /*echo (!Mage::getSingleton('customer/session')->isLoggedIn()) ? '' : 'onclick="linkToNotify()"'; */?> >
+            <?php /*echo __("+ Notify when back in stock") */?>
+        </a>
+    </p>-->
+
+    <?php
+        if(Mage::getSingleton('customer/session')->isLoggedIn()){
+        ?>
+            <p class="mess">
+                <a class="hul color-red csp" onclick="linkToNotify();">
+                    <?php echo __("+ Notify when back in stock") ?>
+                </a>
+            </p>
+    <?php
+        }else{
+            ?>
+            <p class="mess">
+                <a class="hul color-red csp" href="#inline1">
+                    <?php echo __("+ Notify when back in stock") ?>
+                </a>
+            </p>
+        <?php
+        }
+    ?>
+    <p class="out-of-stock"><?php echo __("Out of Stock") ?></p>
+</div>
+
+<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+
+    <!--<div class="popup-notify" style="display: none">-->
+    <div style="display: none">
+        <div id="inline1" style="width:600px;height:100px;overflow:auto;">
+        <!--<span onclick="closePopupNotify()" class="close-popup">X</span>-->
+
+        <p><?php echo __("You need to") ?> <a class="tdu"
+                                               onclick="linkToNotify()"><?php echo __("Register an account") ?></a> <?php echo __("with us and") ?>
+            <a class="tdu"
+               onclick="linkToNotify()"><?php echo __("Sign in") ?></a> <?php echo __("to be notified when the item is back in stock") ?>
+        </p>
+        <button type="button" class="button btn-continue" onclick="linkToNotify()">
+        <span>
+            <span>
+                <?php echo __("Continue") ?>
+            </span>
+        </span>
+        </button>
+    </div>
+    </div>
+
+    <script type="text/javascript">
+        function showPopupNotify() {
+            jQuery("#inline1").css("display", "block");
+        }
+        function closePopupNotify() {
+            jQuery(".popup-notify").css("display", "none");
+        }
+    </script>
+<?php endif ?>
+<script type="text/javascript">
+    function linkToNotify() {
+        var url = "<?php echo $this->escapeHtml($this->getSignupUrl()) ?>";
+        var childProductID = jQuery('.product-alert .mess a').first().val();
+        if(childProductID){
+            var re = /(\/product_id\/)(\d*)/;
+            var myArray = re.exec(url);
+            url = url.replace(re, '$1' + childProductID);
+        }
+        document.location = (url);
+    }
+</script>

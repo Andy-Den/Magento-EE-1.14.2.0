@@ -1,0 +1,65 @@
+<?php if ($this->getCollection()->getSize()): ?>
+    <div class="toolbar">
+        <div class="pager">
+            <p class="amount">
+                <?php /*if ($this->getLastPageNum() > 1): */?><!--
+                    <?php /*echo $this->__('%s Results', $this->getTotalNum()) */?>
+                <?php /*else: */?>
+                    <?php /*echo $this->__('%s Results', $this->getTotalNum()) */?>
+                --><?php /*endif; */?>
+
+                <?php if($this->getLastPageNum()>1): ?>
+                    <?php echo $this->__('Items %s to %s of %s total', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
+                <?php else: ?>
+                    <?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?>
+                <?php endif; ?>
+
+            </p>
+            <?php echo $this->getPagerHtml() ?>
+            <div class="limiter">
+                <label><?php echo $this->__('Show') ?></label>
+                <select onchange="setLocation(this.value)">
+                    <?php foreach ($this->getAvailableLimit() as $_key => $_limit): ?>
+                        <option
+                            value="<?php echo $this->getLimitUrl($_key) ?>"<?php if ($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                            <?php echo $_limit ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select> <?php echo $this->__('per page') ?>
+            </div>
+            <?php if ($this->isExpanded()): ?>
+                <div class="sorter">
+                    <div class="sort-by">
+                        <label class="f-left"> <?php echo $this->__('Sort By') ?></label>
+                        <?php echo $current_url = Mage::helper('core/url')->getCurrentUrl();
+                        $url_array = explode("?" , $current_url);
+                        ?>
+
+                        <select onchange="setLocation(this.value)" class="f-left">
+
+                            <option value="<?php echo $url_array[0] ."?dir=desc&order=position"; ?>"<?php if($this->isOrderCurrent('position') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                                Popular
+                            </option>
+                            <option value="<?php echo $url_array[0] ."?dir=desc&order=reviews_count"; ?>"<?php if($this->isOrderCurrent('reviews_count') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                                Most Reviewed
+                            </option>
+
+
+                            <option value="<?php echo $url_array[0] ."?dir=desc&order=created_at"; ?>"<?php if($this->isOrderCurrent('created_at') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                                Newest
+                            </option>
+                            <option value="<?php echo $url_array[0] ."?dir=desc&order=price"; ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'asc'): ?> selected="selected"<?php endif; ?>>
+                                Price (Low to High)
+                            </option>
+                            <option value="<?php echo $url_array[0] ."?dir=desc&order=price"; ?>"<?php if($this->isOrderCurrent('price') && $this->getCurrentDirection() == 'desc'): ?> selected="selected"<?php endif; ?>>
+                                Price (High to Low)
+                            </option>
+
+                        </select>
+
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif ?>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gento_ReCaptcha>
+            <version>0.1.0</version>
+        </Gento_ReCaptcha>
+    </modules>
+    <frontend>
+        <routers>
+            <captcha>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Gento_ReCaptcha before="Mage_Captcha">Gento_ReCaptcha</Gento_ReCaptcha>
+                    </modules>
+                </args>
+            </captcha>
+        </routers>
+    </frontend>
+</config>
+
+
+

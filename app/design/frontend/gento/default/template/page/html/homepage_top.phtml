@@ -1,0 +1,33 @@
+<div class="f-left left_content_home">
+    <!--<h3>Shop by brands</h3>-->
+    <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('shop-by-brands')->toHtml(); ?>
+    <div id="list_brands_home">
+        <ul class="list_brands_home">
+            <?php  $orginalcollection = Mage::helper('brands/data')->getBrands();
+            foreach ($orginalcollection as $brand) {
+                if($brand['filler'] == 1):
+                    ?>
+                    <li><a href="<?php echo $brand['url'] ?>"><?php echo $brand['title'] ?></a></li>
+                <?php
+                endif;
+            } ?>
+            <li><a href="<?php echo $this->getUrl('brands-we-carry'); ?>" class="color-blue">
+                    <p><?php echo __("See All Brands") ?></p></a>
+            </li>
+        </ul>
+    </div>
+    <div class="cl mb15"></div>
+    <?php
+    $promotionBlock = Mage::getModel('cms/block')->load('pupsik_left_menu_promotion');
+    $othersBlock = Mage::getModel('cms/block')->load('pupsik_left_menu_others');
+    ?>
+    <h3>
+        <?php echo $promotionBlock->getTitle(); ?>
+    </h3>
+    <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_left_menu_promotion')->toHtml(); ?>
+    <div class="cl mb15"></div>
+    <h3>
+        <?php echo $othersBlock->getTitle(); ?>
+    </h3>
+    <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_left_menu_others')->toHtml(); ?>
+</div>

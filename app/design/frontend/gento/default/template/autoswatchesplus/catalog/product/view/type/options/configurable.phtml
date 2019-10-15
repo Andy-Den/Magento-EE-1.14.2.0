@@ -1,0 +1,99 @@
+
+    <div class="overflowclear"></div>
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+$swatchsize = Mage::helper('autoswatchesplus')->getSwatchSize($_product);
+$pad = $swatchsize + 15;
+$swatch_attributes = Mage::helper('autoswatchesplus')->getSwatchAttributes();
+$title = Mage::getStoreConfig('auto_swatches_plus/autoswatchesplusgeneral/title',Mage::app()->getStore());
+$hide = Mage::getStoreConfig('auto_swatches_plus/autoswatchesplusgeneral/hidedropdown',Mage::app()->getStore());
+$swatchattribids = array();
+$l = 0;
+?>
+<?php if (count($_attributes)):?>
+
+    	<?php foreach($_attributes as $_attribute):
+			$_productAttribute = $_attribute->getProductAttribute();
+			if(in_array($_productAttribute->getAttributeCode(), $swatch_attributes))
+			{
+				$swatchattribids[$l] = $_attribute->getAttributeId();?>
+            <dl class="wrapattribute">
+       			<dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label> - <label id="divattribute<?php echo $_attribute->getAttributeId() ?>" class="swatchLabel"><?php echo $title ?></label></dt><?php
+            	if($_attribute->decoratedIsLast)
+				{ ?>
+            		<dd class="last">
+                		<div class="input-box">
+                        	<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select<?php if($hide == 1) echo ' swatchSelect'; ?>">
+            					<option><?php echo $this->__('Choose an Option...') ?></option>
+          					</select>
+							<?php echo Mage::helper('autoswatchesplus')->getSwatchHtml($_productAttribute, $_attribute, $swatchsize, $_product); ?>
+                      	</div>
+                   	</dd>
+				<?php } else { ?>
+                	<dd>
+          				<div class="input-box">
+                        	<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select<?php if($hide == 1) echo ' swatchSelect'; ?>">
+            					<option><?php echo $this->__('Choose an Option...') ?></option>
+          					</select>
+							<?php echo Mage::helper('autoswatchesplus')->getSwatchHtml($_productAttribute, $_attribute, $swatchsize, $_product); ?>
+                       	</div>
+                   	</dd>
+
+				<?php } ?>
+                </dl>
+     	<?php } else { ?>
+        <dl class="wrapattribute2">
+        	<dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
+        	<dd <?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+            	<div class="input-box">
+                	<select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                    	<option><?php echo $this->__('Choose an Option...') ?></option>
+                  	</select>
+              	</div>
+          	</dd>
+         </dl>
+   		<?php } ?>
+        <?php $l++; ?>
+    <?php endforeach; ?>
+     <div class="overflowclear"></div>
+
+	<script type="text/javascript">
+	/* <![CDATA[ */
+        jQuery(document).ready(function(){
+            var i=-1;
+            jQuery(".options-container-big select option").each(function(){
+                i++;
+            });
+            if(jQuery('select').find('.disabled').length >= i){
+                jQuery(".product-shop .product-options-bottom .add-to-cart").css('display','none');
+                jQuery(".product-shop .product-options-bottom .wrap_add_to_cart_button").css('display','none');
+            }
+        });
+        var selects = document.getElementsByTagName('select'),
+    		numSelects = selects.length,
+    		i;
+		function setClickHandler(element) {
+    		element.onchange = function () {
+        		var id = this.options[this.selectedIndex].value;
+                if(document.getElementById(id)){
+                    clickHandler = document.getElementById(id).onmousedown;
+                    if(clickHandler){
+                        clickHandler.apply(this);
+                    }
+                }
+    		}
+		}
+		for (i=0; i<numSelects; i++) {
+    		setClickHandler(selects[i]);
+		}
+		var spConfig = new Product.Config(<?php echo $this->getJsonConfig() ?>);
+		var attoptions = new Array;
+			<?php for($i=0;$i<count($swatchattribids); $i++){
+				echo "attoptions[$i]='".$swatchattribids[$i]."';\n"; } ?>
+		var selecttitle = "<?php echo $title ?>";
+		/* ]]> */
+    </script>
+       <script type="text/javascript" src="<?php echo Mage::getBaseUrl('js').'cjm/autoswatchesplus/colorselected.js' ?>"></script>
+
+<?php endif;?>

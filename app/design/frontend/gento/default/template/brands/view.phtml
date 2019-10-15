@@ -1,0 +1,27 @@
+<?php $brand = Mage::registry('current_brand');
+$uri = $_SERVER['REQUEST_URI'];
+$segment = explode("/", $uri);
+$shop_by_brands = $segment[2] ;// shop-by-brands;
+?>
+<?php if($shop_by_brands == "shop-by-brands" && isset($_GET['cat'])):?>
+    <div class="back-link-cate" style="margin-bottom: 10px;" >See All Categories</div>
+<?php endif;?>
+<div class="page-title">
+    <h1><?php echo $this->__('Brands - %s', $this->stripTags($brand->getTitle(), null, true))?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php if($_description=$brand->getDescription()): ?>
+<div class="category-description std">
+		<?php echo $_description?>
+</div>
+<?php else:?>
+<div class="category-nodescription"></div>
+<?php endif; ?>
+<?php echo $this->getChildHtml('product_list') ?>
+<script type="text/javascript">
+    jQuery('.back-link-cate').click(function(){
+        parent.history.back();
+        return false;
+    });
+</script>

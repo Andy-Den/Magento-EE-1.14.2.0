@@ -1,0 +1,86 @@
+.checkout-onepage-index .opc {
+    width: 700px;
+    border: 5px solid #d2c9cc;
+    margin: 0 auto;
+}
+.checkout-onepage-index #checkout-step-login .col2-set {
+    background: #fcfcfc url(../images/bkg_cols.gif) repeat-y 160px 0;
+}
+.checkout-onepage-index .form-list input.input-text {
+    width: 254px;   margin-right: 10px;
+}
+.checkout-onepage-index .form-list li.fields .field {
+    float: left;
+}
+.checkout-onepage-index .form-list select {
+    width: 266px;
+}
+.checkout-onepage-payment-additional-giftcardaccount {
+display: none;
+}
+.checkout-onepage-index .form-list .billing_address input.input-text {
+    width: 618px;
+}
+.state_province {
+    display: block !important; width: 266px;
+}
+.checkout-onepage-index .form-list li.fields .field.name-lastname  {
+    width: 266px;
+}
+.checkout-onepage-index .customer-name , .wrap_city_province {
+    width: 630px; overflow: hidden; clear: both;
+}
+.margin_top_shipping {
+    margin-top: 10px !important;
+}
+
+.fixed_width {
+    width: 266px;
+}
+#checkout-progress-wrapper dt {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+#checkout-step-billing .form-list {
+    width: 630px;
+    overflow: hidden;
+    clear: both;
+}
+#checkout-step-billing .form-list .control .input-box  {
+float: left;
+}
+.checkout-onepage-index .form-list li.fields {
+    overflow: hidden; clear: both;
+}
+.checkout-onepage-index .sidebar .block .block-title , .checkout-onepage-index .sidebar .block .block-content {
+    padding: 0;
+}
+#checkout-progress-wrapper .sidebar .block .block-title {
+    padding: 60px 0 0 0;
+}
+#checkout-progress-wrapper .sidebar .block .block-content {
+    padding: 0 0 10px 0;
+}
+.checkout-onepage-index .opc .step{
+    margin-top: 0;
+    padding: 15px 35px 15px 35px;
+}
+.checkout-onepage-index .sidebar{
+    width: 230px;
+    /*margin: 45px 0 0 0;*/
+    font-size: 13px;
+    line-height: 19px;
+    padding-top: 165px;
+}
+#checkoutSteps .form-list label {
+float: none; clear: both; line-height: 23px;
+}
+#checkoutSteps .form-list .input-box {
+    float: none;
+}
+
+.checkout-onepage-index .col-main {
+width: 710px;
+}

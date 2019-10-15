@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+            <action method="addCss"><stylesheet>braintree/css/braintree.css</stylesheet></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="braintree_payments/datajs" name="braintree_payments_data_js" template="braintree/data_js.phtml" />
+            <block type="braintree_payments/form" name="payment.form.braintree" template="braintree/review_js.phtml">
+                <action method="setMethodInfo"></action>
+            </block>
+        </reference>
+    </onestepcheckout_index_index>
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+            <action method="addCss"><stylesheet>braintree/css/braintree.css</stylesheet></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="braintree_payments/datajs" name="braintree_payments_data_js" template="braintree/data_js.phtml" />
+        </reference>        
+    </checkout_onepage_index>
+    <checkout_multishipping_billing>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+            <action method="addCss"><stylesheet>braintree/css/braintree.css</stylesheet></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="braintree_payments/datajs" name="braintree_payments_data_js" template="braintree/data_js.phtml" />
+        </reference>        
+    </checkout_multishipping_billing>
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+        </reference>
+    </checkout_cart_index>
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.items.after">
+            <block type="braintree_payments/form" name="payment.form.braintree" template="braintree/review_js.phtml">
+                <action method="setMethodInfo"></action>
+            </block>
+        </reference>
+    </checkout_onepage_review>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="braintree_payments" ifconfig="payment/braintree/use_vault">
+                <name>credit_card</name>
+                <path>customer/creditcard/</path>
+                <label>Credit Cards</label>
+            </action>
+        </reference>
+    </customer_account>
+    <customer_creditcard_index>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="braintree_payments/creditcard_management" name="customer_creditcard_management" template="braintree/creditcard/index.phtml" />
+        </reference>
+    </customer_creditcard_index>
+    <customer_creditcard_new>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="braintree_payments/datajs" name="braintree_payments_data_js" template="braintree/data_js.phtml" />
+        </reference>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="braintree_payments/creditcard_management" name="customer_creditcard_management" template="braintree/creditcard/edit.phtml"/>
+        </reference>
+    </customer_creditcard_new>
+    <customer_creditcard_edit>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="braintree_payments/datajs" name="braintree_payments_data_js" template="braintree/data_js.phtml" />
+        </reference>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="braintree_payments/creditcard_management" name="customer_creditcard_management" template="braintree/creditcard/edit.phtml">
+                <action method="setType"><value>edit</value></action>
+            </block>
+        </reference>
+    </customer_creditcard_edit>
+    <customer_creditcard_delete>
+        <reference name="before_body_end">
+            <block type="braintree_payments/datajs" name="braintree_payments_data_js" template="braintree/data_js.phtml" />
+        </reference>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="braintree_payments/creditcard_management" name="customer_creditcard_management" template="braintree/creditcard/delete.phtml" />
+        </reference>
+    </customer_creditcard_delete>
+</layout>

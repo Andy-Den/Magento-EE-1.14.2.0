@@ -1,0 +1,172 @@
+<div class="listbrands">
+    <div class="top_section">
+        <h1>Brands</h1>
+        <ul id="alphabet_selector">
+            <?php foreach (range('A', 'Z') as $char): ?>
+                <li><a class="charLink" char="<?php echo strtolower($char) ?>"><?php echo $char ?></a></li>
+            <?php endforeach; ?>
+
+            <?php foreach (range('0', '9') as $char2): ?>
+                <li><a class="charLink" char="<?php echo strtolower($char2) ?>"><?php echo $char2; ?></a></li>
+            <?php endforeach; ?>
+            <li><a class="charLink" char="all"><?php echo __("All") ?></a></li>
+        </ul>
+
+    </div>
+    <div id="brand_selector" style="margin: 0px;">
+        <?php
+        $orginalcollection = Mage::helper('brands/data')->getBrands();
+        $_collection = array_change_key_case($orginalcollection, CASE_UPPER);
+        function cmp($a, $b)
+        {
+            return strcmp(strtoupper($a['title']), strtoupper($b['title']));
+        }
+
+        usort($_collection, "cmp");
+        $flag = 0;
+        $uppercase = '';
+        $liCounter = 0;
+        $numLine = 7;
+        $newlist = '';
+        foreach ($_collection as $col):
+            $brand_status = $col['status'];
+            if ($brand_status == 1):
+                ?>
+
+                <?php
+                $title = strtoupper($col['title']);
+                $stringcompare = strtoupper(substr($title, 0, 1));
+                ?>
+                <?php if ($uppercase != $stringcompare && $stringcompare != "0" && $stringcompare != "1" && $stringcompare != "2" && $stringcompare != "3" && $stringcompare != "4" && $stringcompare != "5"
+                && $stringcompare != "6" && $stringcompare != "7" && $stringcompare != "8" && $stringcompare != "9"
+            ):
+                ?>
+                <?php if ($flag == 0): ?>
+                <div class="wrapbrand" id="brand-alphabet-<?php echo strtolower($stringcompare); ?>">
+            <?php endif; ?>
+                <?php if ($flag != 0): ?>
+                </div>
+                <div class="wrapbrand" id="brand-alphabet-<?php echo strtolower($stringcompare); ?>">
+            <?php endif; ?>
+                <h2 class="brandfilter"><?php echo $uppercase = $stringcompare; ?></h2>
+                <?php
+                if ($liCounter != 0) {
+                    echo "</ul>";
+                    $liCounter = 0;
+                }
+                ?>
+            <?php endif; ?>
+
+                <?php if ($liCounter == 0): ?>
+                <ul>
+            <?php endif; ?>
+                <?php if ($stringcompare != "0" && $stringcompare != "1" && $stringcompare != "2" && $stringcompare != "3" && $stringcompare != "4" && $stringcompare != "5"
+                && $stringcompare != "6" && $stringcompare != "7" && $stringcompare != "8" && $stringcompare != "9"
+            ): ?>
+
+                <li>
+                <div class="brandtitle"><a href="<?php echo $col['url'] ?>"><?php echo $title; ?></a></div>
+                </li><?php endif; ?>
+
+                <?php $liCounter++; ?>
+                <?php if ($liCounter == $numLine || $flag == count($_collection)): ?>
+                </ul>
+            <?php $liCounter = 0; ?>
+            <?php endif; ?>
+
+                <?php if ($flag == count($_collection)) : ?>
+                </div>
+            <?php endif;
+                $flag++;
+            endif;
+        endforeach; ?>
+    </div>
+    <!--- Start - Showing only number brands -->
+    <?php $flag = 0;
+    foreach ($_collection as $col):
+        $title = ($col['title']);
+        $brand_status = $col['status'];
+        $stringcompare = substr($title, 0, 1);
+        ?>
+        <?php  if ($brand_status == 1): ?>
+        <?php if ($uppercase != $stringcompare && ($stringcompare == "0" || $stringcompare == "1" || $stringcompare == "2" || $stringcompare == "3" || $stringcompare == "4" || $stringcompare == "5"
+            || $stringcompare == "6" || $stringcompare == "7" || $stringcompare == "8" || $stringcompare == "9")
+    ):
+        ?>
+        <?php if ($flag == 0): ?>
+        <div class="wrapbrand" id="brand-alphabet-<?php echo strtolower($stringcompare); ?>">
+    <?php endif; ?>
+        <?php if ($flag != 0): ?>
+        </div>
+        <div class="wrapbrand" id="brand-alphabet-<?php echo strtolower($stringcompare); ?>">
+    <?php endif; ?>
+        <h2 class="brandfilter"><?php echo $uppercase = $stringcompare; ?></h2>
+        <?php
+        if ($liCounter != 0) {
+            echo "</ul>";
+            $liCounter = 0;
+        }
+        ?>
+    <?php endif; ?>
+        <?php if ($stringcompare == "0" || $stringcompare == "1" || $stringcompare == "2" || $stringcompare == "3" || $stringcompare == "4" || $stringcompare == "5"
+        || $stringcompare == "6" || $stringcompare == "7" || $stringcompare == "8" || $stringcompare == "9"
+    ): ?>
+        <?php if ($liCounter == 0): ?>
+            <ul>
+        <?php endif; ?>
+
+
+        <li>
+            <div class="brandtitle"><a href="<?php echo $col['url'] ?>"><?php echo $title; ?></a></div>
+        </li>
+
+
+        <?php $liCounter++; ?>
+        <?php if ($liCounter == $numLine || $flag == count($_collection)): ?>
+            </ul>
+
+            <?php $liCounter = 0; ?>
+        <?php endif; ?>
+    <?php endif; ?>
+
+        <?php if ($flag == count($_collection)) : ?>
+        </div>
+    <?php endif;
+        $flag++; ?>
+    <?php endif; ?>
+    <?php endforeach; ?>
+    <!--- End - Showing only number brands -->
+
+
+</div>
+</div>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('#alphabet_selector li a.charLink').each(function () {
+            var char = jQuery(this).attr('char');
+            if (char == 'all' || (jQuery('#brand_selector').length > 0 && jQuery('#brand-alphabet-' + char).length > 0)) {
+                jQuery(this).click(function () {
+                    var clickedChar = jQuery(this).attr('char');
+                    var marginValue = 0;
+                    if (clickedChar != 'all') {
+                        var offsetTopParent = (jQuery('#brand_selector').offset()) ? jQuery('#brand_selector').offset().top : 0;
+                        var offsetTopChild = (jQuery('#brand-alphabet-' + clickedChar).offset()) ? jQuery('#brand-alphabet-' + clickedChar).offset().top : 0;
+                        marginValue = offsetTopParent - offsetTopChild;
+                    }
+                    jQuery("#brand_selector").animate({
+                        marginTop: marginValue + 'px'
+                    }, 1000, function () {
+                        // Animation complete.
+                    });
+                });
+            } else {
+                jQuery(this).addClass('disabledLink');
+                jQuery(this).removeClass('charLink');
+            }
+        });
+    });
+</script>
+
+
+
+

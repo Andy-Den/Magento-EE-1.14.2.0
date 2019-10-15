@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Inchoo_AutoInvoicemail>
+            <version>0.1.0</version>
+        </Inchoo_AutoInvoicemail>
+    </modules>
+    <global>
+        <models>
+            <inchoo_autoinvoicemail>
+                <class>Inchoo_AutoInvoicemail_Model</class>
+            </inchoo_autoinvoicemail>
+        </models>
+        <events>
+            <sales_order_invoice_save_after>
+                <observers>
+                    <inchoo_autoinvoicemail>
+                        <type>singleton</type>
+                        <class>Inchoo_AutoInvoicemail_Model_Observer</class>
+                        <method>automaticallyInvoiceEmail</method>
+                    </inchoo_autoinvoicemail>
+                </observers>
+            </sales_order_invoice_save_after>
+        </events>
+    </global>
+</config>

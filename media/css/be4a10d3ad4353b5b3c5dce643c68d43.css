@@ -1,0 +1,866 @@
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+
+/* Widgets =============================================================================== */
+.widget { display:inline; }
+.widget .widget-title { clear:both; padding:15px 0 0; margin:0 0 7px; }
+.widget .widget-title h2 { font-size:15px; font-weight:bold; color:#e25203; }
+
+.widget .mini-products-images-list .product-image { display:block; width:76px; height:76px; border:1px solid #a9a9a9; margin:0 auto; }
+.widget .mini-products-images-list li.item { float:left; width:77px; height:77px; }
+
+/* Widget: Catalog New Proructs List */
+.widget-new-products { display:block; }
+.col-main .widget-new-products { margin:7px 0; }
+.widget-new-products .products-grid .product-image,
+.widget-new-products .products-list .product-image { width:85px; height:85px; }
+.widget-new-products .products-list .product-shop { margin-left:100px; }
+.sidebar .widget-new-products .block { font-size:11px; line-height:1.25; }
+.sidebar .widget-new-products .block-title strong { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-new.gif) 0 1px no-repeat; padding-left:21px; color:#dc5033; }
+
+/* Widget: Recently Viewed Proructs */
+.widget-viewed { display:block; }
+.col-main .widget-viewed { margin:7px 0; }
+.widget-viewed .products-grid .product-image,
+.widget-viewed .products-list .product-image { width:85px; height:85px; }
+.widget-viewed .products-list .product-shop { margin-left:100px; }
+.sidebar .widget-viewed .block { font-size:11px; line-height:1.25; }
+.sidebar .widget-viewed .block-title strong { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_block-list.gif) 0 0 no-repeat; padding-left:21px; }
+
+/* Widget: Recently Compared Proructs */
+.widget-compared { display:block;}
+.col-main .widget-compared { margin:7px 0; }
+.widget-compared .products-grid .product-image,
+.widget-compared .products-list .product-image { width:85px; height:85px; }
+.widget-compared .products-list .product-shop { margin-left:100px; }
+.sidebar .widget-compared .block { font-size:11px; line-height:1.25; }
+.sidebar .widget-compared .block-title strong { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_block-list.gif) 0 0 no-repeat; padding-left:21px; }
+
+/* Widget: CMS Static Block */
+.widget-static-block {}
+.sidebar .widget-static-block { display:block; margin:0 0 15px; }
+
+/* Widgets: Links Common Styles */
+.top-container .widget a { padding:0 0 0 7px; }
+
+.bottom-container .widget a { padding:0 3px; }
+
+/* Widget: Catalog Product Link */
+.widget-product-link-inline { display:inline; }
+
+.col-main .widget-product-link { display:block; text-align:right; margin:7px 0; }
+.col-main .widget-product-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding-right:15px; }
+
+.sidebar .widget-product-link { display:block; margin:0 0 15px; padding:0 10px; }
+.sidebar .widget-product-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding:0 15px 0 0; }
+
+/* Widget: Catalog Category Link */
+.widget-category-link-inline { display:inline; }
+
+.col-main .widget-category-link { display:block; text-align:right; margin:7px 0; }
+.col-main .widget-category-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding-right:15px; }
+
+.sidebar .widget-category-link { display:block; margin:0 0 15px; padding:0 10px; }
+.sidebar .widget-category-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding:0 15px 0 0; }
+
+/* Widget: CMS Page Link */
+.widget-cms-link-inline { display:inline; }
+
+.col-main .widget-cms-link { display:block; text-align:right; margin:7px 0; }
+.col-main .widget-cms-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding-right:15px; }
+
+.sidebar .widget-cms-link { display:block; margin:0 0 15px; padding:0 10px; }
+.sidebar .widget-cms-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding:0 15px 0 0; }
+/* ======================================================================================= */
+
+#extabs span#tb4 {
+	width: 100px;
+}
+div#noticeevents {
+	border: 1px solid #999;
+	background-color: #FFF;
+	height: 100px;
+	overflow: auto;
+}
+div#noticeevents div {
+	border-bottom: 1px dotted #DDD;
+	padding: 3px;
+	margin: 0px;
+}
+.runner {
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	float: right;
+	font-size: .8em;
+	background-color: #333;
+	color: #FFF;
+	padding: 2px 10px 5px 10px;
+	cursor: pointer;
+}
+
+
+/** Growler Notice Custom Styling **/
+div.Growler-notice {
+	background-color: 		#000;
+	color: 					#fff;
+	opacity: 				.85;
+	filter: 				alpha(opacity = 85);
+	zoom: 					1;
+	width: 					235px;
+	padding: 				10px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	margin-left: 			auto;
+	margin-right: 			auto;
+	font-family: 			Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 				12px;
+	text-align: 			left;
+	display: 				none;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	min-height: 			40px;
+    z-index:                10000;
+}
+
+div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+}
+
+div.Growler-notice-exit {
+	float: 					right;
+	font-weight: 			bold;
+	font-size: 				12px;
+	cursor:					pointer;
+}
+
+/** Plain Theme **/
+div.plain {
+	color: 					#000;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background-color: 		#EDEDED;
+	border: 				1px solid #777;
+}
+
+div.plain div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+	padding: 				2px 10px;
+}
+
+div.plain div.Growler-notice-exit {
+	float: 					right;
+	cursor:					pointer;
+	margin: 				0px;
+	padding: 				0px 0px 2px 2px;
+	width: 					10px;
+	height: 				10px;
+	color: 					#BFBFBF;
+}
+div.plain div.Growler-notice-body {
+	padding: 5px;
+}
+
+
+/** Mac OS X Theme **/
+div.macosx {
+	color: 					#000;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background: #d7d7d7 url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/macosx.jpg) repeat-y 0;
+	border: 				1px solid #C9C9C9;
+}
+
+div.macosx div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+	padding: 				5px 10px;
+}
+
+div.macosx div.Growler-notice-exit {
+	width: 					15px;
+	height: 				15px;
+	float: 					left;
+	cursor:					pointer;
+	margin: 				4px;
+	margin-left: 			1px;
+	font-size: 				0em;
+	color: 					transparent;
+	background: transparent url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/macosx_exit.png) no-repeat left 0;
+}
+div.macosx div.Growler-notice-exit:hover {
+	background: transparent url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/macosx_exit_over.png) no-repeat left 0;
+}
+div.macosx div.Growler-notice-body {
+	padding: 2px 0 10px 25px;
+}
+
+/** Candybars Theme **/
+div.candybar {
+	color: 					#000;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background-color: 		#F5F7FA;
+	border: 				1px solid #19304B;
+}
+
+div.candybar div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+	background: 			url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/candybars.jpg) repeat-x;
+	padding: 				5px 10px;
+}
+
+div.candybar div.Growler-notice-exit {
+	float: 					right;
+	cursor:					pointer;
+	margin: 				3px;
+}
+div.candybar div.Growler-notice-body {
+	border-top: 1px solid #999;
+	padding: 10px;
+}
+
+/** Construction Theme **/
+div.atwork {
+	color: 					#FFF;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background: 			#4d4d4d url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/atwork.png) repeat-y 0;
+	border: 				1px solid #222;
+}
+
+div.atwork div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				12px;
+	padding: 				5px 20px;
+	color: 					#efca23;
+	
+}
+
+div.atwork div.Growler-notice-exit {
+	float: 					right;
+	cursor:					pointer;
+	margin: 				3px;
+}
+div.atwork div.Growler-notice-body {
+	padding: 2px 0 10px 25px;
+}
+
+
+#MB_overlay {
+	position: absolute;
+	margin: auto;
+	top: 0;	left: 0;
+	width: 100%; height: 100%;
+	z-index: 9999;
+	border: 0;
+	background-color: #000!important;
+}
+#MB_overlay[id] { position: fixed; }
+
+#MB_window {
+	position: absolute;
+	top: 0;
+	border: 0 solid;
+	text-align: left;
+	z-index: 10000;
+}
+#MB_window[id] { position: fixed!important; }
+
+#MB_frame {
+	position: relative;
+	background-color: #EFEFEF;
+	height: 100%;
+}
+
+#MB_header {
+	margin: 0;
+	padding: 0;
+}
+
+#MB_content {
+	position: relative;
+	padding: 6px .75em;
+	overflow: auto;
+}
+
+#MB_caption {
+	font: bold 100% "Lucida Grande", Arial, sans-serif;
+	text-shadow: #FFF 0 1px 0;
+	padding: .5em 2em .5em .75em;
+	margin: 0;
+	text-align: left;
+}
+
+#MB_close {
+	display: block;
+	position: absolute;
+	right: 5px; top: 4px;
+	padding: 2px 3px;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 13px;
+}
+#MB_close:hover {
+	background: transparent;
+}
+
+#MB_loading {
+	padding: 1.5em;
+	text-indent: -10000px;
+	background: transparent url(http://pupsik.local/skin/frontend/base/default/ajaxcart/spinner.gif) 50% 0 no-repeat;
+}
+
+/* Color scheme */
+#MB_window {
+	background-color: #EFEFEF;
+	color: #000;
+	
+	-webkit-box-shadow: 0 0 64px #000; 
+	-moz-box-shadow: #000 0 0 64px; 
+	box-shadow: 0 0 64px #000;
+}
+	#MB_frame {
+		padding-bottom: 4px;
+		
+		-webkit-border-bottom-left-radius: 4px;
+		-webkit-border-bottom-right-radius: 4px;
+
+		-moz-border-radius-bottomleft: 4px;
+		-moz-border-radius-bottomright: 4px;
+
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
+	
+	#MB_content { border-top: 1px solid #F9F9F9; }
+
+	#MB_header {
+	  background-color: #DDD;
+	  border-bottom: 1px solid #CCC;
+	}
+		#MB_caption { color: #000 }
+		#MB_close { color: #777 }
+		#MB_close:hover { color: #000 }
+
+
+/* Alert message */
+.MB_alert {
+	margin: 10px 0;
+	text-align: center;
+}
+/**
+ * @category    Mana
+ * @package     Mana_Filters
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+/*.m-filter-item-list .m-selected-filter-item { color: red; }*/
+.m-filter-popup .m-selected-ln-item > a { font-weight: bold; text-decoration: none; }
+.block-layered-nav .btn-remove { margin-top: 3px; }
+.block-layered-nav .currently li { position: relative; padding: 6px 24px 6px 10px; }
+.block-layered-nav .currently .btn-remove { margin-top: 0; position: absolute; right: 4px; top: 9px; margin-left: 0; }
+.block-layered-nav dt { position: relative; zoom: 1; left: 0; top: 0; }
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterAdvanced
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.block-layered-nav .m-filter-group { position: relative; }
+.block-layered-nav .m-filter-actions, .block-layered-nav .m-group-actions
+    { position: absolute; right: 4px; margin: 0; }
+.block-layered-nav .m-filter-actions { top: 9px; }
+.block-layered-nav .m-group-actions { top: 6px; }
+.block-layered-nav .m-filter-actions:after, .block-layered-nav .m-group-actions:after
+    { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
+.block-layered-nav .m-filter-actions > div, .block-layered-nav .m-group-actions > div
+    { margin-left: 4px; }
+
+/**
+ * @category    Mana
+ * @package     Mana_Core
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+#m-wait {
+    position:absolute;
+    color:#d85909;
+    font-size:1.1em;
+    font-weight:bold;
+    text-align:center;
+    /*opacity:0.80;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE8 */
+    z-index:20000;
+    }
+#m-wait .loader {
+    position:fixed;
+    top:45%;
+    left:50%;
+    width:120px;
+    margin-left: -120px;
+    padding:15px 60px;
+    background:#fff4e9;
+    border:2px solid #f1af73;
+    color:#d85909;
+    font-weight:bold;
+    text-align:center;
+    z-index:20100;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    }
+
+#m-wait .loader {  }
+.m-popup {
+    position: absolute;
+    background: white;
+    z-index: 20100;
+}
+.m-popup-overlay {
+    position: absolute;
+    background: black;
+    filter: alpha(opacity = 0); /* percent */
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+    z-index: 10000;
+}
+
+.m-overlay {
+    position: absolute;
+    background: white;
+    filter: alpha(opacity=0); /* percent */
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+    z-index: 10000;
+}
+a.m-disabled { }
+label span.m-disabled { }
+
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterClear
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.block-layered-nav .m-filterclear { float:left; font-weight: normal; font-size: 11px; text-transform: none; }
+.block-layered-nav .m-filterclear .btn-remove { margin: 0; }
+/*
+.col-main .block-layered-nav .m-filterclear { position: static; float: right; font-weight: normal; font-size: 11px; text-transform: none; }
+.col-main .block-layered-nav .m-filterclear .btn-remove {margin: 3px 0 2px 5px; }
+*/
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterCheckboxes
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+ol.m-filter-css-checkboxes li a.m-checkbox-unchecked { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtercheckboxes/checkbox_unchecked.png) 0 0 no-repeat; }
+ol.m-filter-css-checkboxes li a.m-checkbox-checked { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtercheckboxes/checkbox_checked.png) 0 0 no-repeat; }
+ol.m-filter-css-checkboxes li a.m-checkbox-unchecked:hover { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtercheckboxes/checkbox_unchecked_hover.png) 0 0 no-repeat; }
+ol.m-filter-css-checkboxes li a.m-checkbox-checked:hover { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtercheckboxes/checkbox_checked_hover.png) 0 0 no-repeat; }
+ol.m-filter-css-checkboxes li a.m-checkbox-unchecked,
+ol.m-filter-css-checkboxes li a.m-checkbox-checked { padding-left: 20px; text-decoration: none; }
+
+.m-filter-checkboxes li input { margin-right: 5px; position: relative; bottom: 2px; }
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterColors
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-filter-colors {overflow: hidden; width: 100%; margin-bottom: 10px;}
+.horizontal .m-color {float: left; margin: 2px;}
+.m-filter-colors.vertical li { margin:  4px 0 0; }
+.state.m-color { display:  inline-block; margin-left: 3px; }
+
+.m-filter-colors.labels li { overflow: hidden; margin: 4px 0 0; }
+.m-filter-colors.labels .m-color { float: left; margin: 0 4px 0; }
+.m-filter-colors.labels li a { text-decoration: none; }
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterExpandCollapse
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.block-layered-nav .m-collapseable { cursor: pointer; }
+/*.block-layered-nav .m-collapseable.m-expanded { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterexpandcollapse/bkg_layered-down.gif) 9px 11px no-repeat; }*/
+.block-layered-nav .m-filter-expand-collapse { float: left; font-weight: normal; font-size: 11px; text-transform: none; }
+.block-layered-nav .m-filter-expand-collapse .btn-expand-collapse { margin: 0; display: block; width: 11px; height: 11px; font-size: 0; line-height: 0; text-indent: -999em; overflow: hidden; }
+.block-layered-nav .m-expanded .m-filter-expand-collapse .btn-expand-collapse { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterexpandcollapse/m-expanded.png) 0 0 no-repeat; }
+.block-layered-nav .m-collapsed .m-filter-expand-collapse .btn-expand-collapse { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterexpandcollapse/m-collapsed.png) 0 0 no-repeat; }
+
+/********************************/
+/* dropdown menu in left column */
+/********************************/
+.block-layered-nav dl { position: relative; zoom: 1; left: 0; top: 0; }
+.block-layered-nav dt.m-dropdown-menu { cursor: pointer; }
+.block-layered-nav dd.m-dropdown-menu { position: absolute; background: #e7f1f4; z-index: 1; padding: 5px 5px 10px 5px; }
+
+
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterDropdown
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-filter-dropdown { width: 100%; margin-top: 3px; }
+
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterGroup
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.block-layered-nav .m-collapseable-group { cursor: pointer; }
+.block-layered-nav .m-filter-group-expand-collapse { float: left; font-weight: normal; font-size: 11px; text-transform: none; }
+.block-layered-nav .m-filter-group-expand-collapse .btn-expand-collapse { margin: 0; display: block; width: 11px; height: 11px; font-size: 0; line-height: 0; text-indent: -999em; overflow: hidden; }
+.block-layered-nav .m-expanded .m-filter-group-expand-collapse .btn-expand-collapse { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtergroup/m-expanded.png) 0 0 no-repeat; }
+.block-layered-nav .m-collapsed .m-filter-group-expand-collapse .btn-expand-collapse { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtergroup/m-collapsed.png) 0 0 no-repeat; }
+
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterHelp
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-help { cursor: help; display: inline-block; position: relative; }
+.m-help a.dots { cursor: help; }
+.m-help a.details { cursor: help; }
+.m-help .m-text { position: absolute; top: 5px; z-index: 999; background: #F8F7F5; border: 1px #ccc solid; width: 180px; padding: 10px; text-transform:none; }
+.col-left .m-help .m-text { left: 5px; }
+.col-right .m-help .m-text { right: 5px; }
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterPositioning
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+/* CSS Document */
+.hidden       { display:block !important; border:0 !important; margin:0 !important; padding:0 !important; font-size:0 !important; line-height:0 !important; width:0 !important; height:0 !important; overflow:hidden !important; }
+
+/* Containers of Layered Navigation */
+.col-main .block-layered-nav,
+.col-main .block-layered-nav .block-content { background: transparent; border: none; padding: 0; margin: 20px 0 0; position: relative;}
+
+/* Titles SHOP BY and CURRENTLY SHOPPING BY */
+.col-main .block-layered-nav .block-subtitle,
+.col-main .block-layered-nav .currently .block-subtitle { cursor: auto; margin: 0; padding: 0 5px 0 0; border: none; background: none; font-weight: bold; text-transform: uppercase; }
+.col-main .block-layered-nav dl.m-mobile { display: none; }
+.col-main .block-layered-nav dl { float: left; }
+
+/* CURRENTLY SHOPPING BY bar */
+.col-main .block-layered-nav .currently,
+.col-main .block-layered-nav .currently ol { float: left; width: 100%; }
+.col-main .block-layered-nav .currently li { float: left; white-space: nowrap; margin-right: 10px; background: transparent; border: none; padding-left: 0; }
+
+.col-main .block-layered-nav #narrow-by-list { clear: both; position: relative; }
+
+/* Actions */
+.col-main .block-layered-nav .actions,
+.col-main .block-layered-nav .m-horizontal-actions,
+.col-main .block-layered-nav .m-subtitle-actions { position: absolute; right: 5px; top:50%; margin: -6px 0 0; }
+.col-main .block-layered-nav .actions { background: transparent; border: none; float: left; padding: 6px 10px; top:-20px; }
+
+/* Top (as Menu) LN =================================================================================================================================== */
+
+/* SHOP BY bar */
+.col-main .block-layered-nav.m-topmenu.m-wide dl { height: 32px; }
+.col-main .block-layered-nav.m-topmenu.m-wide dl dt { float: left; padding: 7px 20px 7px 10px; cursor: pointer; background: url("http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterpositioning/i-dropdown.gif") 0px 14px no-repeat; margin-left: 5px; font-weight: normal; text-transform: none;}
+.col-main .block-layered-nav.m-topmenu.m-wide dl dt.block-subtitle { background-image: none; padding-left: 0; margin-left: 0; }
+.col-main .block-layered-nav.m-topmenu.m-wide dl dd { background: white; position: absolute; width: auto; padding: 20px 10px 10px 10px; border-bottom: 5px solid #DEE5E8; display: block; z-index: 9999;
+/*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='white', endColorstr='#eaeaea');
+    background: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(white));
+    background: -moz-linear-gradient(top,  white,  #eaeaea);
+*/
+    filter: alpha(opacity=90);
+  	-moz-opacity: 0.9;
+  	opacity: 0.9;
+
+    }
+.col-main .block-layered-nav.m-topmenu .m-filter-slider { margin:0 !important; }
+/* Javascript operates with these classes */
+.col-main .block-layered-nav.m-topmenu dl dt.m-ln {  }
+.col-main .block-layered-nav.m-topmenu dl dd.m-ln {  }
+.col-main .block-layered-nav.m-topmenu dl dd.m-ln li { white-space: nowrap; }
+
+/* Classes added on Mouse Over */
+.col-main .block-layered-nav.m-topmenu dl dt.m-popup-filter { background: #DEE5E8; }
+.col-main .block-layered-nav.m-topmenu dl dd.m-popup-filter {  }
+
+/* Top LN - Horizontaly laid filters =================================================================================================================================== */
+.col-main .block-layered-nav.m-top dl { width: 19%; }
+.col-main .block-layered-nav.m-top.two-filter-columns dl { width: 50%; }
+.col-main .block-layered-nav.m-top.three-filter-columns dl { width: 33%; }
+.col-main .block-layered-nav.m-top.four-filter-columns dl { width: 23%; }
+.col-main .block-layered-nav.m-top dl dd { background: transparent; margin-right: 5px;}
+
+/*Responsive accordion menu for mobile divices========================================================================*/
+.col-main .block-layered-nav.one-filter-column dl { width: 100%; }
+.col-main .block-layered-nav.one-filter-column dl { padding:0; margin:0; }
+.col-main .block-layered-nav.one-filter-column dl.m-mobile { display: block; }
+.col-main .block-layered-nav.one-filter-column dl dt,
+.col-main .block-layered-nav.one-filter-column .block-subtitle { cursor: pointer; display:block; padding:5px !important; position: relative; margin:0; background: #eee; border-bottom:1px solid #ddd; border-top:1px solid #f9f9f9;}
+.col-main .block-layered-nav.one-filter-column dl dt:hover,
+.col-main .block-layered-nav.one-filter-column .block-subtitle { background: #ddd;
+transition: background 300ms ease-in-out;
+-moz-transition: background 300ms ease-in-out;
+-webkit-transition: background 300ms ease-in-out;
+-o-transition: background 300ms ease-in-out;}
+.col-main .block-layered-nav.one-filter-column dl dd { padding:10px 5px; margin:0; background: transparent; }
+.col-main .block-layered-nav.one-filter-column .m-filterclear { position: relative; right: 5px; }
+.col-main .block-layered-nav.one-filter-column .m-filter-colors { margin:0; }
+.col-main .block-layered-nav.one-filter-column .currently { margin:0; }
+.col-main .block-layered-nav.one-filter-column .currently ol { float: left; width: auto; }
+.col-main .block-layered-nav.one-filter-column .actions { right: 20px; top:0; margin: 0; padding: 5px 10px; z-index:3; }
+
+.col-main .block-layered-nav.one-filter-column .m-expand-collapse { float: left; font-weight: normal; font-size: 11px; text-transform: none; margin-bottom: -5px; display: none; }
+.col-main .block-layered-nav.one-filter-column .m-expand-collapse .btn-expand-collapse { margin: 0; display: block; width: 11px; height: 11px; font-size: 0; line-height: 0; text-indent: -999em; overflow: hidden; }
+.col-main .block-layered-nav.one-filter-column .m-expanded .m-expand-collapse .btn-expand-collapse { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterpositioning/m-expanded.png) 0 0 no-repeat; }
+.col-main .block-layered-nav.one-filter-column .m-collapsed .m-expand-collapse .btn-expand-collapse { background: url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterpositioning/m-collapsed.png) 0 0 no-repeat; }
+.col-main .block-layered-nav.one-filter-column .m-expand-collapse { display: block; }
+.col-main .block-layered-nav.one-filter-column .currently + div .block-subtitle,
+.col-main .block-layered-nav.one-filter-column .currently + div + div .block-subtitle { display: none; }
+
+.col-main .block-layered-nav.m-wide.m-mobile-only { margin: 0; }
+.col-main .block-layered-nav.m-wide.m-mobile-only .m-shop-by { display: none; }
+
+/* Types styling for Top LN only */
+.m-standard {} /* One item can be selected at the time */
+.m-list {} /* Text, multiple select */
+.m-checkboxes {} /* checkboxes - form elements */
+.m-css_checkboxes {} /* checkboxes - images */
+.m-colors {} /* Colors and Images - horizontal */
+.m-colors_vertical {} /* Colors and Images - vertical */
+.m-colors_label {} /* Colors and Images with labels */
+.m-dropdown {} /* Dropdowns */
+.m-radios {} /* Radio buttons */
+.m-slider {} /* Slider */
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterRadios
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+
+.m-filter-radios li input { margin-right: 5px; position: relative; bottom: 2px; }
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterShowMore
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-more-less { font-size: 11px; text-align: right; }
+.m-expandable-filter { overflow: hidden; }
+.m-scrollable-filter { overflow-x: hidden !important; overflow-y: scroll !important; border: 1px solid #ccc; padding: 2px 0 2px 5px; background: rgba(255,255,255,0.5); }
+.m-scrollable-filter li { white-space: nowrap; }
+
+.m-filter-popup { padding: 10px; }
+.m-filter-popup .m-columns { overflow: hidden; }
+.m-filter-popup .m-columns > li { float: left; width: 200px; text-align: left; }
+.m-filter-popup .m-columns.m-filter-colors.horizontal { width: 600px; }
+.m-filter-popup .m-columns.m-filter-colors.horizontal > li { width: auto; }
+.m-filter-popup .buttons-set { margin: 8px 0 0; }
+.m-filter-popup .m-filter-colors { margin: 0; }
+.m-showmore-popup-container { box-shadow : 15px 15px 25px 5px rgba( 0, 0, 0, 0.4 ); }
+
+.m-option-search { padding: 4px 0; }
+.m-option-search input { width: 100%; }
+.m-option-search input.m-empty { color: #c0c0c0; }
+.m-no-match { display: none; }
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterSlider
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+
+/* For All */
+.m-filter-slider { margin: 10px 0 15px; }
+/* Responsive layout */
+.one-filter-column .m-filter-slider { margin-bottom: 20px;  }
+.one-filter-column .m-slider-values { line-height: 25px; }
+.one-filter-column .m-slider-values input { width: 50px; padding: 1px 3px; }
+
+/* Default style - style1 */
+.m-filter-slider { height: 17px; position: relative; background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterslider/bkg_slider.png) 0 0 repeat-x; }
+.m-filter-slider > .m-slider-from, .m-filter-slider > .m-slider-to { height: 17px; width: 17px; position: absolute; }
+.m-filter-slider > .m-slider-span { height: 8px; position: absolute; background: none; border-bottom: 2px solid #969696; margin: 0; }
+.m-filter-slider > .m-slider-from { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterslider/slider.png) 0 0 no-repeat; cursor: e-resize; }
+.m-filter-slider > .m-slider-to { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterslider/slider.png) -19px 0 no-repeat; cursor: w-resize; }
+
+.m-slider-values {text-align: center; margin-top: 3px; } 
+.m-slider-values .m-slider-min-value { float: left; }
+.m-slider-values .m-slider-max-value { float: right;}
+.m-slider-selected-value {}
+
+/* Style2 */
+.m-filter-slider.style2 { border: 2px solid #c8c8c8; border-width: 0 1px; background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filterslider/bkg_slider2.png) center 0 repeat-x; }
+.m-filter-slider.style2 > .m-slider-span { height: 6px; border-bottom: 5px solid #969696; }
+.m-filter-slider.style2 > .m-slider-from, .m-filter-slider.style2 > .m-slider-to { height: 17px; width: 5px; background: #26b1e8 none; }
+.m-filter-slider.style2 > .m-slider-from { margin-right: 1px; }
+.m-filter-slider.style2 > .m-slider-to { margin-left: 1px; }
+/* Touch screen slider style */
+.one-filter-column .m-filter-slider.style2 > .m-slider-from,
+.one-filter-column .m-filter-slider.style2 > .m-slider-to {
+width:15px;
+height:30px;
+top:-7px;
+}
+/* Style3 */
+.m-filter-slider.style3 { background: #e6e6e6; }
+.m-filter-slider.style3,
+.m-filter-slider.style3 > .m-slider-span { height: 5px; border: none; }
+.m-filter-slider.style3 > .m-slider-span { background: #888; }
+.m-filter-slider.style3 > .m-slider-from,
+.m-filter-slider.style3 > .m-slider-to,
+.m-filter-slider.style3:before,
+.m-filter-slider.style3:after { height: 20px; width: 10px; top:-9px; background: #aaa none; z-index: 4; }
+.m-filter-slider.style3 > .m-slider-from,
+.m-filter-slider.style3 > .m-slider-to{
+box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.5);
+border:1px solid #ccc;
+background: #eeeeee;
+background: -moz-linear-gradient(top,  #eeeeee 0%, #cccccc 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc));
+background: -webkit-linear-gradient(top,  #eeeeee 0%,#cccccc 100%);
+background: -o-linear-gradient(top,  #eeeeee 0%,#cccccc 100%);
+background: -ms-linear-gradient(top,  #eeeeee 0%,#cccccc 100%);
+background: linear-gradient(to bottom,  #eeeeee 0%,#cccccc 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+}
+.m-filter-slider.style3:before,
+.m-filter-slider.style3:after { position: absolute; left: 0; height:22px; top:-8px; width: 5px; background-color: #e6e6e6; display: block; content: ""; z-index: 3;}
+.m-filter-slider.style3:before{}
+.m-filter-slider.style3:after { right: 0; left: auto;}
+
+/* Touch screen slider style */
+.one-filter-column .m-filter-slider.style3:before,
+.one-filter-column .m-filter-slider.style3:after{
+width:5px;
+height:30px;
+top:-12px;
+}
+.one-filter-column .m-filter-slider.style3 > .m-slider-from,
+.one-filter-column .m-filter-slider.style3 > .m-slider-to {
+width:28px;
+height:28px;
+top:-14px;
+}
+/* Style4 */
+.m-filter-slider.style4,
+.m-filter-slider.style4 > .m-slider-span,
+.m-filter-slider.style4 > .m-slider-from,
+.m-filter-slider.style4 > .m-slider-to { border-radius:15px; height:10px; }
+.m-filter-slider.style4 {
+background:#e3e3e3;
+box-shadow: inset 1px 1px 3px 1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.2);
+border: 1px solid #f2f2f2;
+}
+.m-filter-slider.style4 > .m-slider-from,
+.m-filter-slider.style4 > .m-slider-to {
+background: #aaa none;
+box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
+width:18px;
+height:18px;
+top:-5px;
+border:1px solid #eee;
+background: #ffffff;
+background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed));
+background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+background: linear-gradient(to bottom,  #ffffff 0%,#f6f6f6 47%,#ededed 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+}
+.m-filter-slider.style4 > .m-slider-span {
+background: #838383;
+box-shadow: inset 0px 1px 3px 1px rgba(0,0,0,0.2);
+border: none;
+margin-left: -20px;
+padding-left: 20px;
+}
+/* Touch screen slider style */
+.one-filter-column .m-filter-slider.style4 > .m-slider-from,
+.one-filter-column .m-filter-slider.style4 > .m-slider-to {
+width:28px;
+height:28px;
+top:-10px;
+}
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterSuperSlider
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+input.m-slider { width: 30px; }
+.col-main .block-layered-nav.m-topmenu dl.m-slider.m-inline dt { background-image: none; padding-left: 0; }
+.col-main .block-layered-nav.m-topmenu dl.m-slider.m-inline dd { background: none; position: static; border-bottom: 0; float: left;
+    padding: 7px 10px 7px 0; }
+
+.col-main .block-layered-nav.m-topmenu dl.m-slider.m-inline dd .m-filter-slider { float: left; width: 130px; }
+.col-main .block-layered-nav.m-topmenu dl.m-slider.m-inline dd .m-slider-values { float: left; margin-top: 0; margin-left: 5px; }
+.col-main .block-layered-nav.m-topmenu dl.m-slider.m-inline dd .m-slider-min-value,
+.col-main .block-layered-nav.m-topmenu dl.m-slider.m-inline dd .m-slider-max-value
+    { display: none; }
+
+.m-slider-values.left-aligned { text-align: left; }
+
+/**
+ * @category    Mana
+ * @package     ManaPro_FilterTree
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.m-expanded > .m-tree-item, .m-collapsed > .m-tree-item, .m-leaf > .m-tree-item { padding-left: 15px; }
+.m-expanded > .m-tree-item, .m-collapsed > .m-tree-item { cursor: pointer; }
+.m-expanded > .m-tree-item { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtertree/expanded.png) 0 4px no-repeat; }
+.m-collapsed > .m-tree-item { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtertree/collapsed.png) 0 4px no-repeat; }
+.m-expanded > .m-tree-item:hover { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtertree/expanded_over.png) 0 4px no-repeat; }
+.m-collapsed > .m-tree-item:hover { background: transparent url(http://pupsik.local/skin/frontend/base/default/css/../images/manapro_filtertree/collapsed_over.png) 0 4px no-repeat; }
+.m-expanded > ul, .m-collapsed > ul { margin-left: 10px; }
+

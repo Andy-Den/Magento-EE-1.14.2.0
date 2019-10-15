@@ -1,0 +1,16 @@
+<div class="see_all overflowclear"><a href="<?php echo $this->getUrl('brands-we-carry'); ?>">
+        <p><?php echo __("See All >") ?></p></a></div>
+<?php
+$brand_count = 0;
+$orginalcollection = Mage::helper('brands/data')->getBrands();
+shuffle($orginalcollection);
+foreach ($orginalcollection as $brand) {
+    if ($brand['filler'] == 1 && $brand_count < 7) {
+        ?>
+        <a href="<?php echo $brand['url'] ?>"><img
+                src="<?php echo Mage::helper('brands/data')->getBrandImageUrl($brand['image']) ?>"
+                alt="<?php echo $brand['title'] ?>" width="129"/></a>
+        <?php $brand_count++;
+    }
+} ?>
+</div>

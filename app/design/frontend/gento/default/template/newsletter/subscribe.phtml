@@ -1,0 +1,20 @@
+
+<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+    <div class="form-subscribe">
+        <div class="form-subscribe-header overflowclear">
+            <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('pupsik_footer_subscribetxt')->toHtml();
+            ?>
+        </div>
+        <div class="v-fix">
+            <input name="email" type="text" id="newsletter" class="input-text required-entry validate-email f-left" placeholder="Enter your email" />
+            <button type="submit" class="button f-left" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+        </div>
+
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+

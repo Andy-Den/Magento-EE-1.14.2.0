@@ -1,0 +1,46 @@
+/* Swatch Styles */
+
+.swatchesContainer {
+	padding-top:0px;
+}
+
+.swatchesContainerPadded {
+	padding-top:15px;
+}
+
+.swatchLabel {
+	font-weight:normal!important;
+}
+
+.disabledSwatch {
+	display:none;	
+}
+
+.swatchSelect {
+	display:none;
+}
+
+.swatchContainer {
+	display:inline;
+}
+
+.swatch {
+	padding: 1px;
+	display: inline;
+	cursor: pointer;
+	float: left;
+	margin-bottom: 4px;
+	margin-left: 8px;
+    border: 1px solid #333;
+}
+
+.swatchSelected {
+	padding: 1px;
+	display:inline; 
+	cursor:pointer; 
+	float:left;
+	margin-bottom: 4px;
+	margin-left: 8px;
+	border: 1px solid #000000;
+}
+

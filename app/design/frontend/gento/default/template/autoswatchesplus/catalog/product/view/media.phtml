@@ -1,0 +1,182 @@
+
+<?php if($this->helper('customer')->isLoggedIn()) : ?>
+
+<?php endif; ?>
+<?php
+$product      = $this->getProduct();
+/** @var $helper EcommerceTeam_CloudZoom_Helper_Data */
+$helper       = Mage::helper('ecommerceteam_cloudzoom');
+/** @var $outputHelper Mage_Core_Block_Abstract */
+$outputHelper = $this->helper('catalog/output');
+
+$position       = $helper->getConfigData('position');
+$showTitle      = intval($helper->getConfigFlag('show_title'));
+$titleOpacity   = intval($helper->getConfigData('title_opacity')) / 100;
+$lensOpacity    = intval($helper->getConfigData('lens_opacity')) / 100;
+$tintColor      = trim($helper->getConfigData('tint_color'));
+$tintOpacity    = intval($helper->getConfigData('tint_opacity')) / 100;
+$zoomWidth      = intval($helper->getConfigData('zoom_width'));
+$zoomHeight     = intval($helper->getConfigData('zoom_height'));
+$bigImageWidth  = intval($helper->getConfigData('big_image_width'));
+$bigImageHeight = intval($helper->getConfigData('big_image_height'));
+
+$config = array(
+    "position:'{$position}'",
+    "showTitle:{$showTitle}",
+    "titleOpacity:{$titleOpacity}",
+    "lensOpacity:{$lensOpacity}",
+);
+
+if ($position == 'inside') {
+    $config[] = 'adjustX: -4,adjustY:-4';
+} elseif ($position == 'right') {
+    $config[] = 'adjustX: 10,adjustY:-4';
+} elseif ($position == 'bottom') {
+    $config[] = 'adjustX: -4,adjustY:10';
+} elseif ($position == 'left') {
+    $config[] = 'adjustX: -18,adjustY:-4';
+} elseif ($position == 'top') {
+    $config[] = 'adjustX: -4,adjustY:-18';
+}
+
+if ($tintColor) {
+    $config[] = "tint:'{$tintColor}',tintOpacity:{$tintOpacity}";
+}
+
+if ($zoomWidth) {
+    $config[] = "zoomWidth:460";
+}
+
+if ($zoomHeight) {
+    $config[] = "zoomHeight:460";
+}
+?>
+<?php
+    $_product = $this->getProduct();
+    $helper       = Mage::helper('ecommerceteam_cloudzoom');
+    $baseImg = $this->helper('catalog/image')->init($product, 'image');
+?>
+ <?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+<p class="product-image product-image-zoom">
+    <a href='<?php echo $baseImg;?>' class = 'cloud-zoom' data-lightbox="lightbox" id='zoom1' rel="<?php echo implode($config, ',');?>"> <?php
+        $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(450).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" width="450" height="450"   />';
+
+		  echo $outputHelper->productAttribute($product, $_img, 'zoom1');
+    ?></a>
+</p>
+
+
+<?php else: ?>
+<p class="product-image">
+  <a href='<?php echo $baseImg;?>' class = 'cloud-zoom' data-lightbox="lightbox" id='zoom1' rel="<?php echo implode($config, ',');?>">
+  <?php
+        $_img = '<img id="image"  src="'.$this->helper('catalog/image')->init($_product, 'image')->resize(450).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" width="450" height="450" />';
+        		  echo $outputHelper->productAttribute($product, $_img, 'image');
+    ?>
+    </a>
+</p>
+<?php endif; ?>
+<input type="hidden" id="before_option" >
+
+<?php if (count($this->getGalleryImages()) >= 1): ?>
+	<div class="more-views">
+		<?php if ($_product->getTypeId() == "configurable" && Mage::helper('autoswatchesplus')->getUsesSwatchAttribs($_product) == 'yes'): ?>
+			<?php echo Mage::helper('autoswatchesplus')->getMoreViews($_product); ?>
+		<?php else : ?>
+    		<ul id="ul-moreviews">
+    			<?php
+                $lightbox = ''; $i = 0;
+                foreach ($this->getGalleryImages() as $_image):
+                    $currentImage = $this->helper('catalog/image')->init($product, 'image', $_image->getFile());
+                    ?>
+        			<li class="real-lb-order-<?php echo $i;?>">
+					<a data-value="0" data-order="<?php echo $i?>" href='<?php echo $currentImage;?>' class='cloud-zoom-gallery' title='<?php echo $this->htmlEscape($_image->getLabel()) ?>'
+            rel="useZoom: 'zoom1', smallImage: '<?php echo $currentImage->resize(450);?>' "><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(77); ?>" width="77" height="77" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+        			</li>
+                    <?php $lightbox .= '<a data-lightbox = "lb-0" class="lb-order-'.$i.'" href="'.$_image['url'].'"></a>'; $i++; ?>
+    			<?php endforeach; ?>
+    		</ul>
+
+            <div id="lightbox-hidden" style="display: none">
+                <?php echo $lightbox?>
+            </div>
+      	<?php endif; ?>
+        <script type="text/javascript">
+            jQuery(function() {
+                var product_img = jQuery("#zoom1").attr("href");
+                jQuery("#ul-moreviews li").each(function(){
+                    var a = jQuery(this).find('a').first();
+                    if(product_img === a.attr("href") || jQuery(this).hasClass('baseImg')){
+                        lb_filter(a);
+                        return false;
+                    }
+                })
+            });
+        </script>
+	</div>
+<?php endif; ?>
+
+
+
+
+
+
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/cloud-zoom.1.0.2.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/lightbox.js') ?>"></script>
+<link type="text/css" rel="stylesheet" href="<?php echo $this->getSkinUrl('css/cloud-zoom.css') ?>" />
+<link type="text/css" rel="stylesheet" href="<?php echo $this->getSkinUrl('css/lightbox.css') ?>" />
+<script type="text/javascript">
+    jQuery(function() {
+
+        begin();
+
+
+
+        jQuery("#color-swatches ul li").click(function(){
+            remove_old();
+            var href = jQuery(this).attr("href");
+            jQuery("#lightbox-hidden > a").each(function(index){
+                if(jQuery(this).attr("href") == href){
+                    var old = jQuery(this).attr('data-lightbox');
+                    jQuery(this).attr('data-lightbox',old+'_old');
+                }
+            })
+        })
+
+        jQuery("#ul-moreviews a").click(function(){
+            lb_filter(jQuery(this));
+        })
+    });
+
+    function begin(){
+        remove_old();
+        var href = jQuery("#zoom1").attr("href");
+        href = href.replace("/image/", "/base/");
+        jQuery("#lightbox-hidden > a").each(function(index){
+            if(jQuery(this).attr("href") == href){
+                var old = jQuery(this).attr('data-lightbox');
+                jQuery(this).attr('data-lightbox',old+'_old');
+            }
+        })
+        jQuery("#zoom1").attr("data-lightbox","lb-0");
+    }
+
+    function remove_old(){
+        jQuery("#lightbox-hidden a").each(function(){
+            var old = jQuery(this).attr('data-lightbox');
+            old = old.replace("_old","");
+            jQuery(this).attr('data-lightbox',old);
+        })
+    }
+
+    function lb_filter(obj){
+        remove_old();
+        jQuery("#zoom1").attr('data-lightbox','lb-'+jQuery(obj).data('value'));
+        var value = jQuery(obj).data('value');
+        var order = jQuery(obj).data('order');
+        var old = jQuery("#lightbox-hidden .lb-order-"+order).attr('data-lightbox');
+        jQuery(".lb-order-"+order).attr('data-lightbox',old+'_old');
+        jQuery("#ul-moreviews a").removeClass('selected');
+        jQuery(obj).addClass('selected');
+    }
+</script>

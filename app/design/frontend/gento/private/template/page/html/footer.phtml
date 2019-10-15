@@ -1,0 +1,96 @@
+<div class="footer-container">
+    <div class="subcribe_newsletter overflowclear">
+        <div class="overflowclear marginauto">
+            <div class="f-left subcribe_text">
+                <img src="<?php echo $this->getSkinUrl('images/subcribe_to_us.jpg') ?>" alt="img"/>
+            </div>
+            <div class="subcribe_form f-left">
+                <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml(); ?>
+            </div>
+            <div class="f-left baby_regisry">
+                <a href="<?php echo $this->getUrl(); ?>"><img
+                        src="<?php echo $this->getSkinUrl('images/baby_registry.jpg'); ?>" alt="img"/></a>
+            </div>
+        </div>
+    </div>
+    <div class="wrap_border_footer overflowclear">
+    <div class="border_footer"></div>
+    <div class="border_footer"></div>
+    </div>
+    <div class="footer marginauto">
+        <ul class="wrap_footer_info overflowclear">
+            <li>
+                <ul class="company_info">
+                    <li class="footer_title">Company info</li>
+                    <li><a href="<?php echo $this->getUrl('about-us'); ?>">About Us</a></li>
+                    <li><a href="<?php echo $this->getUrl('why-buy-from-us'); ?>">Why Buy From Us</a></li>
+                    <li><a href="<?php echo $this->getUrl('as-featured-in'); ?>">As Featured In</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="customer_support">
+                    <li class="footer_title">Customer support</li>
+                    <li><a href="<?php echo $this->getUrl(); ?>">Frequently Asked Questions (FAQ)</a></li>
+                    <li class="live_support"><a href="<?php echo $this->getUrl(); ?>">TALK TO A REAL LIVE PERSON <br>
+                            65-6515 4950 (9AM - 6PM) </a></li>
+                    <li class="email_us"><a href="<?php echo $this->getUrl(); ?>">Email Us </a></li>
+                    <li class="facebook_connection"><a href="<?php echo $this->getUrl(); ?>" target="_blank">Find us on
+                            Facebook </a></li>
+                    <li class="twitter_connection"><a href="<?php echo $this->getUrl(); ?>" target="_blank">Find us on
+                            Twitter</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="shipping_return">
+                    <li class="footer_title">SHIPPING AND RETURNS</li>
+                    <li><a href="<?php echo $this->getUrl('shipping-information'); ?>"> Shipping Information </a></li>
+                    <li><a href="<?php echo $this->getUrl('return-policy'); ?>"> Return Policy</a></li>
+                    <li><a href="<?php echo $this->getUrl('estimated-delivery-date'); ?>"> Estimated Delivery Date</a>
+                    </li>
+                    <li class="received_orders">
+                        <span>When will I receive my order?</span></li>
+                    <li class="give_a_call">
+                        <strong>6515 4950</strong>
+                        <span>We love to hear from you</span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <ul class="payment_options">
+                    <li class="footer_title">PAYMENT OPTIONS</li>
+                    <li><img src="<?php echo $this->getSkinUrl('images/payment_methods.jpg') ?>" alt="payment"/></li>
+
+                </ul>
+            </li>
+            <li class="no-margin">
+                <ul class="footer_testimonials">
+                    <li class="footer_title">TESTIMONIALS</li>
+                    <li>
+                        <div class="content_testimonial">
+                            “ Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Integer sagittis mi ac odio
+                            aliquam, ac consequat magna
+                            consequat. ”
+                        </div>
+                        <div class="customer_name">
+                            - Mrs Tan
+                        </div>
+                    </li>
+                    <li>
+                        <div class="content_testimonial">
+                            “ Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Integer sagittis mi ac odio
+                            aliquam, ac consequat magna
+                            consequat. ”
+                        </div>
+                        <div class="customer_name">
+                            - Mrs Tan
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

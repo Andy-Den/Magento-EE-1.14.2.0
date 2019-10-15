@@ -1,0 +1,235 @@
+<?php if ($this->hasItems()): ?>
+    <span id="rma-please-wait" class="please-wait" style="display:none;">
+                    <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt=""
+                         class="v-middle"/> <?php echo $this->__('Please wait, loading...') ?>
+                </span>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery(".box-related .item img").unveil();
+        });
+
+    </script>
+    <div class="box-collateral box-related">
+        <div class="box-title">
+            <h2><?php echo $this->__('Related Products') ?></h2>
+        </div>
+
+        <ul class="products-grid bxslider2" id="related-product-list">
+            <?php $i = 0;
+
+            foreach ($this->getItemCollection() as $_item): ?>
+
+                <li class="item">
+
+
+                    <a href="<?php echo $this->getProductUrl($_item) ?>" class="product-image" style="height: 155px">
+                        <img src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
+                            data-src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(155) ?>"
+                            alt="<?php echo $this->escapeHtml($_item->getName()) ?>"
+                            title="<?php echo $this->escapeHtml($_item->getName()) ?>"/></a>
+                    <?php if (!$_item->isSaleable()): ?>
+                        <p class="sold-out"><?php echo $this->__("Sold Out") ?></p>
+                    <?php endif; ?>
+                    <h2 class="product-name"><a
+                            href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a>
+                    </h2>
+                    <?php echo $this->getPriceHtml($_item, true, '-related') ?>
+
+
+                    <?php if (!$_item->isSaleable() && $_item->getTypeId() === 'simple'): ?>
+                        <?php
+                        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                            ?>
+                            <div class="product-alert">
+                                <p class="mess-login">
+                                    <a href="#inline1" class="hul color-blue csp bttop"
+                                       rel="<?php echo $_item->getId(); ?>">
+                                        <?php echo __("+ Notify when back in stock") ?>
+                                    </a>
+                                </p>
+                            </div>
+                            <?php
+                        } else {
+                            ?>
+                            <div class="product-alert">
+                                <p class="mess">
+                                    <a class="hul color-blue csp bttop" rel="<?php echo $_item->getId(); ?>"
+                                       href="#inline1">
+                                        <?php echo __("+ Notify when back in stock") ?>
+                                    </a>
+                                </p>
+                            </div>
+                            <?php
+                        }
+                        ?>
+
+                    <?php elseif (!$_item->isSaleable() && $_item->getTypeId() === 'configurable'): ?>
+                        <a class="color-blue c-09c hul" href="<?php echo $_item->getProductUrl() ?>">
+                            <?php echo $this->__("+ Notify when back in stock") ?>
+                        </a>
+                    <?php elseif ($_item->getTypeId() === 'bundle' || $_item->getTypeId() === 'configurable' || $_item->getTypeId() === 'grouped'): ?>
+                        <a class="color-blue c-09c hul" href="<?php echo $_item->getProductUrl() ?>">
+                            <?php echo $this->__("+ Select Options") ?>
+                        </a>
+                    <?php elseif ($_item->getTypeId() === 'simple' && $_item->isSaleable()): ?>
+                        <a class="color-blue c-09c hul csp"
+                           onclick='ajaxCartProcessing("<?php echo Mage::helper('checkout/cart')->getAddUrl($_item) ?>","<?php echo $_item->getProductUrl() ?>")'>
+                            <?php echo $this->__("+ Add to Cart") ?>
+                        </a>
+                    <?php endif; ?>
+
+
+                </li>
+
+            <?php endforeach ?>
+        </ul>
+
+        <script
+            type="text/javascript">decorateGeneric($$('.box-related ul.box-content'), ['odd', 'even', 'first', 'last'])</script>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            $$('.related-checkbox').each(function (elem) {
+                Event.observe(elem, 'click', addRelatedToProduct)
+            });
+
+            var relatedProductsCheckFlag = false;
+            function selectAllRelated(txt) {
+                if (relatedProductsCheckFlag == false) {
+                    $$('.related-checkbox').each(function (elem) {
+                        elem.checked = true;
+                    });
+                    relatedProductsCheckFlag = true;
+                    txt.innerHTML = "<strong><?php echo $this->__('unselect all') ?><\/strong>";
+                } else {
+                    $$('.related-checkbox').each(function (elem) {
+                        elem.checked = false;
+                    });
+                    relatedProductsCheckFlag = false;
+                    txt.innerHTML = "<strong><?php echo $this->__('select all') ?><\/strong>";
+                }
+                addRelatedToProduct();
+            }
+
+            function addRelatedToProduct() {
+                var checkboxes = $$('.related-checkbox');
+                var values = [];
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) values.push(checkboxes[i].value);
+                }
+                if ($('related-products-field')) {
+                    $('related-products-field').value = values.join(',');
+                }
+            }
+            //]]>
+        </script>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#related-product-list').bxSlider({
+                maxSlides: 5,
+                slideWidth: 160,
+                slideMargin: 40,
+                pager: false,
+                moveSlides: 1,
+                infiniteLoop: false
+            });
+        })
+    </script>
+<?php endif; ?>
+
+
+
+
+<?php if (!Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+    <script type="text/javascript">
+        jQuery(".products-grid .product-alert .mess a").click(function () {
+            var base_url = "<?php echo $this->getBaseUrl();?>";
+            var id = jQuery(this).attr('rel');
+            var encodedUrl = jQuery.base64.encode(window.location);
+            var url = base_url + '/productalert/add/stock/product_id/' + id + '/uenc/' + encodedUrl + '/';
+            jQuery('.tdu').attr('href', url);
+        });
+
+    </script>
+<?php else: ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery(".product-alert .mess-login a").fancybox({
+                'hideOnOverlayClick':false,
+                'hideOnContentClick':false,
+                'width'				: 700,
+
+                'showNavArrows' : false,
+                'height'			: 55,
+                'maxWidth': 960,
+                'padding'			: 30,
+                'titlePosition'		: 'inside',
+                'transitionIn'		: 'none',
+                'transitionOut'		: 'none',
+                'centerOnScroll'    :'true',
+                'type'				: 'iframe',
+                'autoSize' : false
+            });
+        });
+
+
+        (jQuery('.catalog-category-view').find('div.col2-left-layout')).find('ul.messages').css('display', 'none');
+        jQuery(".products-grid .product-alert .mess-login a").click(function () {
+            var base_url = "<?php echo $this->getBaseUrl();?>";
+            var id = jQuery(this).attr('rel');
+            jQuery('#rma-please-wait').show();
+            jQuery('.category-products').css({'opacity': '0.3'});
+            var encodedUrl = jQuery.base64.encode(window.location);
+            var url = base_url + '/productalert/add/notifyProducts/product_id/' + id + '/uenc/' + encodedUrl + '/';
+            var childProductID = jQuery('.products-grid .product-alert .mess-login a').first().val();
+            if (childProductID) {
+                var re = /(\/product_id\/)(\d*)/;
+                var myArray = re.exec(url);
+                url = url.replace(re, '$1' + childProductID);
+            }
+
+            jQuery(this).attr("href",url);
+
+            jQuery('#rma-please-wait').hide();
+            jQuery('.category-products').css({'opacity': '1', 'position': 'none'});
+
+        });
+    </script>
+<?php endif; ?>
+<script type="text/javascript">
+    //jQuery(".modify").css('margin-left',screen.width/4);
+    var h = (screen.height / 3) / 100;
+    jQuery(".modify").css('margin-top', h + '%');
+    jQuery(".modify").css('margin-left', '5%');
+    function linkToNotify2() {
+        var url = jQuery(".tdu").attr('href');
+        var childProductID = jQuery('.products-grid .product-alert .mess a').first().val();
+        if (childProductID) {
+            var re = /(\/product_id\/)(\d*)/;
+            var myArray = re.exec(url);
+            url = url.replace(re, '$1' + childProductID);
+        }
+        document.location = (url);
+    }
+</script>
+<div style="display: none;">
+    <div id="inline1" style="width:600px;height:auto;overflow:auto;">
+        <div>
+            <p><?php echo __("You need to") ?> <a class="tdu"
+                                                  href="<?php echo $this->escapeHtml($this->getSignupUrl()) ?>"><?php echo __("Register an account") ?></a> <?php echo __("with us and") ?>
+                <a class="tdu"
+                   href="<?php echo $this->escapeHtml($this->getSignupUrl()) ?>"><?php echo __("Sign in") ?></a> <?php echo __("to be notified when the item is back in stock") ?>
+            </p>
+            <button type="button" class="button btn-continue" onclick="linkToNotify2()">
+                <span>
+                    <span>
+                        <?php echo __("Continue"); ?>
+                    </span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>

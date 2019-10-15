@@ -1,0 +1,41 @@
+
+<?php
+    $_items = $this->getReviewsCollection()->getItems();
+?>
+<div class="box-collateral box-reviews" id="customer-reviews">
+    <?php if (count($_items)):?>
+        <div class="box-title">
+            <h2><?php echo $this->__('Customer Reviews') ?></h2>
+        </div>
+        <dl class="box-content" id="product-reviews-list">
+            <?php $i = 1; ?>
+            <?php
+            foreach ($_items as $_review):
+                if($i > 10) break;
+                $summaryRatingPercent = 0;
+                $numRatingType = 0;
+                foreach ($_review->getRatingVotes() as $_vote):
+                    $summaryRatingPercent += $_vote->getPercent();
+                    $numRatingType++;
+                endforeach;
+                $summaryRatingPercent = $summaryRatingPercent/$numRatingType;
+                ?>
+                <dt>
+                    <div>
+                        <div class="rating-box f-left">
+                            <div class="rating" style="width:<?php echo $summaryRatingPercent ?>%;"></div>
+                        </div>
+                        <a style="margin-left: 10px;" href="<?php echo $this->getReviewUrl($_review->getId()) ?>"><?php echo $this->escapeHtml($_review->getTitle()) ?></a>
+                    </div>
+                    <?php echo $this->__('Review by %s on %s', '<b>'.$this->escapeHtml($_review->getNickname()).'</b>', '<b>'.$this->formatDate($_review->getCreatedAt(), 'long').'</b>') ?>
+                </dt>
+                <dd>
+                    <p><?php echo nl2br($this->escapeHtml($_review->getDetail())) ?></p>
+                </dd>
+            <?php $i++; endforeach; ?>
+        </dl>
+        <script type="text/javascript">decorateGeneric($$('#product-reviews-list dd'), ['last']);</script>
+        <?php echo $this->getChildHtml('toolbar') ?>
+    <?php endif;?>
+    <?php echo $this->getChildHtml('review_form') ?>
+</div>

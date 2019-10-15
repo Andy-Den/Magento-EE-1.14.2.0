@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><file>braintree/braintree-1.3.4.js</file></action>
+        </reference>
+        <reference name="js">
+            <block type="adminhtml/template" template="braintree/data_js.phtml"></block>
+        </reference>
+    </adminhtml_sales_order_create_index>
+</layout>

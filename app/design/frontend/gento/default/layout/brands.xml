@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <brands_index_index>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="brands/brands" name="brands_list">
+                <action method="setTemplate" ifconfig="brands/settings/enabled" ifvalue="1">
+                    <template>brands/brands.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </brands_index_index>
+
+    <brands_view_index>
+        <update handle="jquery_core" />
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mana_filters.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filteradvanced.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filtercheckboxes.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterclear.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filtercolors.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterdropdown.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterexpandcollapse.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filtergroup.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterhelp.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterradios.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filtershowmore.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterslider.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filtersuperslider.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filtertree.css</stylesheet></action>
+            <action method="addCss"><stylesheet>css/manapro_filterpositioning.css</stylesheet></action>
+
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filtercolors.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filterexpandcollapse.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filtergroup.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filterhelp.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filtershowmore.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/price_slider.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filterslider.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filtersuperslider.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filtertree.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/manapro_filterpositioning.js</name><params/></action>
+        </reference>
+        <!--<reference name="left">-->
+            <!--<remove name="catalog.leftnav"/> &lt;!&ndash; remove standard layered navigation &ndash;&gt;-->
+            <!--<remove name="enterprisecatalog.leftnav"/> &lt;!&ndash; remove enterprise layered navigation &ndash;&gt;-->
+            <!--<block type="mana_filters/view" name="mana.catalog.leftnav" before="-" template="catalog/layer/view.phtml">-->
+                <!--<action method="unsetChild"><child>m_brands_filter</child></action>-->
+            <!--</block>-->
+            <!--<action method="setMClientSideBlock"><params><type>Mana/Core/Block</type></params></action>-->
+        <!--</reference>-->
+        <!--<reference name="mana.catalog.leftnav">-->
+            <!--<action method="setTemplate" ifconfig="mana_filters/advanced/enabled"><template>manapro/filteradvanced/view.phtml</template></action>-->
+            <!--<action method="setMClientSideBlock"><params><type>Mana/Core/Block</type></params></action>-->
+        <!--</reference>-->
+        <reference name="content">
+            <block type="core/template" name="product_brand" template="brands/view.phtml">
+                <block type="catalog/product_brand" name="product_list" template="catalog/product/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar"
+                           template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>empty</layout>
+                        <count>6</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>one_column</layout>
+                        <count>5</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_left</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>two_columns_right</layout>
+                        <count>4</count>
+                    </action>
+                    <action method="addColumnCountLayoutDepend">
+                        <layout>three_columns</layout>
+                        <count>3</count>
+                    </action>
+                    <action method="setToolbarBlockName">
+                        <name>product_list_toolbar</name>
+                    </action>
+                    <action method="setBrandFilter"/>
+                    <reference name="product_list_toolbar">
+                        <action method="disableParamsMemorizing"/>
+                    </reference>
+                </block>
+            </block>
+            <action method="setMClientSideBlock"><params><type>Mana/Core/Block</type></params></action>
+        </reference>
+    </brands_view_index>
+
+    <brands_adminhtml_brands_index>
+        <reference name="content">
+            <block type="brands/adminhtml_brands" name="brands" />
+        </reference>
+    </brands_adminhtml_brands_index>
+
+    <catalog_product_view>
+        <block type="catalog/product_view" name="product.brand">
+            <action method="setTemplate" ifconfig="brands/settings/enabled" ifvalue="1">
+                <template>brands/product.phtml</template>
+            </action>
+        </block>
+        <reference name="product.info">
+            <action method="insert" ifconfig="brands/settings/enabled" ifvalue="1">
+                <block>product.brand</block>
+            </action>
+        </reference>
+    </catalog_product_view>
+</layout>

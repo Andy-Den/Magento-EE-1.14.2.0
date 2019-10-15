@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * NOTICE OF LICENSE
+ *
+ * You may not give, sell, distribute, sub-license, rent, lease or lend
+ * any portion of the Software or Documentation to anyone.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future.
+ *
+ * @category   ET
+ * @package    ET_CustomerGroupAutoSwitcher
+ * @copyright  Copyright (c) 2012 ET Web Solutions (http://etwebsolutions.com)
+ * @contacts   support@etwebsolutions.com
+ * @license    http://shop.etwebsolutions.com/etws-license-commercial-v1/   ETWS Commercial License (ECL1)
+ */
+ -->
+
+<config>
+    <modules>
+        <ET_CustomerGroupAutoSwitcher>
+            <name>ET Customer Group Auto Switcher</name>
+            <version>1.0.2</version>
+            <descr>
+                <ru_RU><![CDATA[Модуль в автоматическом режиме меняет группу клиента, в зависимости от потраченной им суммы.]]></ru_RU>
+                <en_US><![CDATA[The extension automatically switches customer from group to group depending on the spent amount.]]></en_US>
+            </descr>
+            <permanentlink>
+                <ru_RU>http://shop.etwebsolutions.com/rus/et-customer-group-auto-switcher.html</ru_RU>
+                <en_US>http://shop.etwebsolutions.com/eng/et-customer-group-auto-switcher.html</en_US>
+            </permanentlink>
+            <license>
+                <ru_RU><![CDATA[ETWS Коммерческая лицензия (ECL1)]]></ru_RU>
+                <en_US><![CDATA[ETWS Commercial License (ECL1)]]></en_US>
+            </license>
+            <licenselink>
+                <ru_RU>http://shop.etwebsolutions.com/rus/etws-license-commercial-v1</ru_RU>
+                <en_US>http://shop.etwebsolutions.com/eng/etws-license-commercial-v1</en_US>
+            </licenselink>
+            <redminelink>http://support.etwebsolutions.com/projects/customergroupswitc/roadmap</redminelink>
+            <ourserviceslink>
+                <ru_RU>http://shop.etwebsolutions.com/rus/our-services</ru_RU>
+                <en_US>http://shop.etwebsolutions.com/eng/our-services</en_US>
+            </ourserviceslink>
+        </ET_CustomerGroupAutoSwitcher>
+    </modules>
+    <global>
+        <models>
+            <customergroupautoswitcher>
+                <class>ET_CustomerGroupAutoSwitcher_Model</class>
+                <resourceModel>customergroupautoswitcher_mysql4</resourceModel>
+            </customergroupautoswitcher>
+            <customergroupautoswitcher_mysql4>
+                <class>ET_CustomerGroupAutoSwitcher_Model_Mysql4</class>
+                <entities>
+                    <rules>
+                        <table>et_customergroup_rules</table>
+                    </rules>
+                </entities>
+            </customergroupautoswitcher_mysql4>
+        </models>
+        <helpers>
+            <customergroupautoswitcher>
+                <class>ET_CustomerGroupAutoSwitcher_Helper</class>
+            </customergroupautoswitcher>
+        </helpers>
+        <blocks>
+            <customergroupautoswitcher>
+                <class>ET_CustomerGroupAutoSwitcher_Block</class>
+            </customergroupautoswitcher>
+        </blocks>
+        <resources>
+            <customergroupautoswitcher_setup>
+                <setup>
+                    <module>ET_CustomerGroupAutoSwitcher</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </customergroupautoswitcher_setup>
+            <customergroupautoswitcher_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </customergroupautoswitcher_write>
+            <customergroupautoswitcher_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </customergroupautoswitcher_read>
+        </resources>
+
+        <template>
+            <email>
+                <customer_group_switched_template translate="label" module="customergroupautoswitcher">
+                    <label>Group Auto Switching Email</label>
+                    <file>et_customergroupautoswitcher.html</file>
+                    <type>html</type>
+                </customer_group_switched_template>
+            </email>
+        </template>
+    </global>
+
+    <admin>
+        <routers>
+            <customergroupautoswitcher>
+                <use>admin</use>
+                <args>
+                    <module>ET_CustomerGroupAutoSwitcher</module>
+                    <frontName>customergroupautoswitcher</frontName>
+                </args>
+            </customergroupautoswitcher>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <menu>
+            <promo>
+                <children>
+                    <customergroupautoswitcher translate="title" module="customergroupautoswitcher">
+                        <title>Customer Group Auto Switcher</title>
+                        <sort_order>999</sort_order>
+                        <action>customergroupautoswitcher/adminhtml_rules</action>
+                    </customergroupautoswitcher>
+                </children>
+            </promo>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <customergroupautoswitcher translate="title" module="customergroupautoswitcher">
+                                            <title>ET Customer Group Auto Switcher</title>
+                                            <sort_order>400</sort_order>
+                                        </customergroupautoswitcher>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                        <promo>
+                            <children>
+                                <customergroupautoswitcher translate="title" module="customergroupautoswitcher">
+                                    <title>ET Customer Group Auto Switcher</title>
+                                    <sort_order>400</sort_order>
+                                </customergroupautoswitcher>
+                            </children>
+                        </promo>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+        <translate>
+            <modules>
+                <ET_CustomerGroupAutoSwitcher>
+                    <files>
+                        <default>ET_CustomerGroupAutoSwitcher.csv</default>
+                    </files>
+                </ET_CustomerGroupAutoSwitcher>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <customergroupautoswitcher>
+                    <file>et_customergroupautoswitcher.xml</file>
+                </customergroupautoswitcher>
+            </updates>
+        </layout>
+
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <customergroupautoswitcher_observer>
+                        <class>customergroupautoswitcher/observer</class>
+                        <method>updategroups</method>
+                    </customergroupautoswitcher_observer>
+                </observers>
+            </sales_order_save_after>
+        </events>
+    </adminhtml>
+
+
+    <frontend>
+        <layout>
+            <updates>
+                <customergroupautoswitcher>
+                    <file>et_customergroupautoswitcher.xml</file>
+                </customergroupautoswitcher>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <ET_CustomerGroupAutoSwitcher>
+                    <files>
+                        <default>ET_CustomerGroupAutoSwitcher.csv</default>
+                    </files>
+                </ET_CustomerGroupAutoSwitcher>
+            </modules>
+        </translate>
+
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <customergroupautoswitcher_observer>
+                        <class>customergroupautoswitcher/observer</class>
+                        <method>updategroups</method>
+                    </customergroupautoswitcher_observer>
+                </observers>
+            </sales_order_save_after>
+        </events>
+
+    </frontend>
+
+    <default>
+        <customergroupautoswitcher>
+            <general>
+                <email_identity>general</email_identity>
+                <switch_new>0</switch_new>
+                <switch_up>1</switch_up>
+                <switch_down>0</switch_down>
+                <enable_log>1</enable_log>
+
+            </general>
+            <email>
+                <email_identity>general</email_identity>
+                <send_new>1</send_new>
+                <send_up>1</send_up>
+                <send_down>0</send_down>
+            </email>
+
+        </customergroupautoswitcher>
+    </default>
+
+</config>

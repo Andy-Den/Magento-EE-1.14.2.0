@@ -1,0 +1,132 @@
+<?php
+$masterCategory = $this->getCurrentCategory();
+$catIds = explode(',', $masterCategory->getChildren());
+$categories = array();
+foreach ($catIds as $catId) {
+    $category = Mage::getModel('catalog/category')->load($catId);
+    $img = Mage::getBaseDir('media') .DS."catalog".DS."category".DS. $category->getThumbnail();
+    $imageResized = Mage::getBaseDir('media').DS."catalog".DS."category".DS."resized";
+    if(!file_exists($imageResized)) mkdir($imageResized,0777);
+    $imageResized = $imageResized.DS.$category->getThumbnail();
+    if (!file_exists($imageResized)&& file_exists($img)) :
+        $imageObj = new Varien_Image($img);
+        $imageObj->constrainOnly(TRUE);
+        $imageObj->keepAspectRatio(TRUE);
+        $imageObj->keepFrame(TRUE);
+        $imageObj->backgroundColor(array(255,255,255));
+        $imageObj->resize(185, 220);
+        $imageObj->save($imageResized);
+    endif;
+    $categories [$category->getName()] = array(
+        'url' => $category->getUrl(),
+        'img' => Mage::getBaseUrl('media').DS."catalog/category".DS."resized".DS.$category->getThumbnail(),
+        'description' => $category->getDescription(),
+        'metatitle' => $category->getMetaTitle(),
+        'id' => $category->getId()
+    );
+};
+?>
+<div class="overflowclear wrap_main_categories">
+<div class="f-left">
+    <h1 class="main_category_title"><?php echo $masterCategory->getName(); ?></h1>
+            <ul class="categories_list overflowclear">
+                <?php $counter = 1; foreach ($categories as $name => $data) : ?>
+                    <li>
+                        <h1 class="main_categories_name<?php if($counter==1){ echo " nomargin" ; $counter++; } ?>">
+                            <a href="<?php echo $data['url']; ?>">
+                            <?php echo $name; ?>
+                            </a>
+                        </h1>
+                        <?php
+                        $sub_categories = Mage::getModel('catalog/category')->load($data['id'])->getChildrenCategories();
+                        if(count($sub_categories) > 0):  ?>
+                            <ul class="sub_categories_left">
+                                <?php foreach($sub_categories as $sub_category): ?>
+                                    <li>
+
+                                        <a href="<?php echo $sub_category->getUrl(); ?>"><?php echo $sub_category->getName(); ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                                <li class="see_all_categories no-bg no-border"><a href="<?php echo $data['url']; ?>">See All <?php echo $name; ?></a></li>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+</div>
+<div class="f-right categories_page">
+
+    <div class="wrap_main_category_info">
+        <div class="main_category_info">
+            <?php echo $masterCategory->getDescription(); ?>
+
+        </div>
+        <div class="main_category_image overflowclear">
+          <?php if($masterCategory->getImage()!=""): ?>
+            <img src="<?php echo Mage::getBaseUrl('media').DS."catalog/category".DS.$masterCategory->getImage(); ?>" alt="main_category_image" />
+<?php else : ?>
+
+            <?php endif; ?>
+        </div>
+        <?php echo Mage::app()->getLayout()->getBlock("breadcrumbs")->toHtml(); ?>
+    </div>
+
+       <ul class="list_categories overflowclear">
+            <?php  foreach ($categories as $name => $data) : $counter2 = 1; ?>
+            <li class="overflowclear">
+              <h1 class="main_categories_name">
+
+                <a href="<?php echo $data['url']; ?>">
+                  <?php echo $name; ?>
+                </a>
+              </h1>
+                <?php
+                $sub_categories = Mage::getModel('catalog/category')->load($data['id'])->getChildrenCategories();
+                if(count($sub_categories) > 0):  ?>
+                <ul class="sub_categories overflowclear">
+                    <?php foreach($sub_categories as $sub_category):
+                        $sub_category = Mage::getModel('catalog/category')->load($sub_category->getId());
+                        $img = Mage::getBaseDir('media') .DS."catalog".DS."category".DS. $sub_category->getThumbnail();
+                        $imageResized = Mage::getBaseDir('media').DS."catalog".DS."category".DS."resized";
+                        if(!file_exists($imageResized)) mkdir($imageResized,0777);
+                        $imageResized = $imageResized.DS.$sub_category->getThumbnail();
+                        if (!file_exists($imageResized)&& file_exists($img)) :
+                            $imageObj = new Varien_Image($img);
+                            $imageObj->constrainOnly(TRUE);
+                            $imageObj->keepAspectRatio(TRUE);
+                            $imageObj->keepFrame(TRUE);
+                            $imageObj->backgroundColor(array(255,255,255));
+                            $imageObj->resize(185, 220);
+                            $imageObj->save($imageResized);
+                        endif;
+                        $sub_category [$sub_category->getName()] = array(
+                            'url' => $sub_category->getUrl(),
+                            'img' => Mage::getBaseUrl('media').DS."catalog/category".DS."resized".DS.$sub_category->getThumbnail(),
+                            'description' => $sub_category->getDescription()
+                        );
+
+                       $quantity_categories = count($sub_categories);
+                        ?>
+                    <li class="category_item<?php if($counter2%4==0){ echo " no-border no-padding no-margin" ;} ?>">
+                        <div class="category_name">
+                        <a href="<?php echo $sub_category->getUrl(); ?>"><?php echo $sub_category->getName(); ?></a>
+                        </div>
+                        <div class="category_image">
+                            <a href="<?php echo $sub_category->getUrl(); ?>">
+                                <?php if($sub_category->getThumbnail()!=""): ?>
+                            <img width="185" height="220" src="<?php echo Mage::getBaseUrl('media'). DS . "catalog/category" .DS . "resized" . DS . $sub_category->getThumbnail(); ?>" alt="img" />
+                                <?php else: ?>
+                                    <img src="<?php echo $this->getSkinUrl('images/no-available-image.png'); ?>" alt="img" width="185" height="220" />
+                                <?php endif; ?>
+                            </a>
+                        </div>
+
+                    </li>
+                    <?php  $counter2++; endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</div>

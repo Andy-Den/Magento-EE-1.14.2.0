@@ -1,0 +1,32 @@
+<?php
+$totals = Mage::getSingleton('checkout/session')->getQuote()->getTotals();
+if(isset($totals['tax']) && $totals['tax']->getValue()) {
+    $tax = $totals['tax']->getValue(); //Tax value if present
+} else {
+    $tax = '';
+}
+
+?>
+<?php if ($this->getTotals()): ?>
+
+<tfoot>
+    <?php $_colspan = $this->helper('tax')->displayCartBothPrices() ? 5 : 3; ?>
+    <?php echo $this->renderTotals(null, $_colspan); ?>
+    <?php echo $this->renderTotals('footer', $_colspan); ?>
+    <tr>
+        <td class="a-right checkout-gst" colspan="3"><span>(<?php echo $this->__('GST included'); ?>)</span></td>
+        <td class="a-right checkout-gst"><span class="price"><?php echo $this->helper('checkout')->formatPrice($tax); ?>
+            </span></td>
+    </tr>
+    <?php if ($this->needDisplayBaseGrandtotal()):?>
+    <tr>
+        <td class="a-right" colspan="<?php echo $_colspan; ?>">
+            <small><?php echo $this->helper('sales')->__('Your credit card will be charged for') ?></small>
+        </td>
+        <td class="a-right">
+            <small><?php echo $this->displayBaseGrandtotal() ?></small>
+        </td>
+    </tr>
+    <?php endif?>
+</tfoot>
+<?php endif; ?>

@@ -1,0 +1,47 @@
+
+<?php $_product = $this->getProduct(); ?>
+<?php $buttonTitle = $this->__('Add to Cart'); ?>
+<?php //if($_product->isSaleable()): ?>
+    <div class="add-to-cart">
+        <?php if(!$_product->isGrouped()): ?>
+            <div class="product_view_quantity">
+        <div class="overflowclear label_quantity">
+           <div class="f-left"> <?php echo $this->__('Quantity:') ?></div>
+            <input type="text"  maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="no-border increase_value" /></div>
+            <div class="add newvalue">-</div>
+        <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty increase_value" />
+            <div class="sub newvalue">+</div>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="wrap_add_to_cart_button">
+    <button type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+
+    <?php echo $this->getChildHtml('', true, true); ?>
+    </div>
+<?php //endif; ?>
+<script type="text/javascript">
+    jQuery(document).ready(function()
+    {
+        jQuery(".newvalue").click(function()
+        {
+            addvalue = jQuery(this);
+            var oldvalue = jQuery("input.increase_value").val();
+            var newVal = 0;
+            if(addvalue.text() == "+"){
+                newVal = parseFloat(oldvalue) + 1;
+            }
+            else {
+                if(oldvalue >= 1){
+                    newVal = parseFloat(oldvalue) - 1;
+                }
+                if(oldvalue==1){
+                    newVal = parseFloat(oldvalue);
+                }
+            }
+            jQuery("input.increase_value").val(newVal);
+
+
+        });
+    });
+</script>

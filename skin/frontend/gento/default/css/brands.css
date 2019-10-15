@@ -1,0 +1,4 @@
+.products-grid li.item-brands { float:left; width:138px; padding:12px 10px 10px; }
+.products-grid .brands-image { display:block; width:135px; margin:0 0 10px; }
+.product-brand-image { display: block; margin: 15px auto}
+.category-nodescription { clear: left; margin: 5px}

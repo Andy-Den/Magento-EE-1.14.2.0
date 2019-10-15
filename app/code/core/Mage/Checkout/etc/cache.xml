@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <placeholders>
+        <my_placeholder_identifier>
+            <block>mycompany_mymodule/blockname</block>
+            <placeholder>MY_PLACEHOLDER_NAME</placeholder>
+            <container>Mycompany_Mymodule_Model_Container_Blockname</container>
+            <cache_lifetime>86400</cache_lifetime>
+        </my_placeholder_identifier>
+    </placeholders>
+</config>

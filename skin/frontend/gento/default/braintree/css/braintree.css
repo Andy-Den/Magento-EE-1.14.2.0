@@ -1,0 +1,3 @@
+.uni-wrapperIn .braintree select {width: 210px;}
+#payment_form_braintree #cc_type_auto_row .payment-type-image {float: left;}
+#payment_form_braintree .disabled-payment-method {opacity: 0.2;}

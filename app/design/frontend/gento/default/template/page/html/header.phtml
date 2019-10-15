@@ -1,0 +1,156 @@
+<div class="header-container">
+    <div class="header-panel marginauto">
+        <ul class="f-right wrap_cart_header">
+            <li class="total_cart_item overflowclear"><span
+                    class="total_count_cart"><?php echo Mage::helper('checkout/cart')->getCart()->getItemsCount(); ?> </span>
+                <strong>items</strong></li>
+            <li class="header-minicart">
+                <?php echo Mage::app()->getLayout()->createBlock("checkout/cart_sidebar")->setTemplate("checkout/cart/cartheader.phtml")->toHtml(); ?>
+                <?php //echo Mage::app()->getLayout()->createBlock("core/template")->setTemplate("page/cartheadertemp.phtml")->toHtml(); ?>
+            </li>
+        </ul>
+        <ul class="list_menu_top f-left">
+            <?php if (!Mage::helper('customer')->isLoggedIn()): ?>
+                <li class="margin"><a href="<?php echo $this->getUrl('customer/account/login',array('_secure'=>true)); ?>">Login / Sign Up </a>
+                </li>
+            <?php else : ?>
+                <li class="margin"><a href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>">Logout </a></li>
+                <li class="margin"><a href="<?php echo $this->getUrl('customer/account',array('_secure'=>true)); ?>">My Account </a></li>
+            <?php endif; ?>
+            <li><?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_header_top_link')->toHtml(); ?></li>
+        </ul>
+        <div
+            class="no-bg hotline"><?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_header_phone')->toHtml();
+            ?></div>
+        <div
+            class="free_delivery f-right"><?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_header_freedelivery')->toHtml();
+            ?></div>
+
+    </div>
+    <div class="header marginauto">
+        <div class="branding">
+            <h1 class="logo f-left">
+                <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo">
+                    <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_header_logo')->toHtml();
+                    ?>
+                </a>
+            </h1>
+
+            <div class="quick-access f-right">
+                <div
+                    class="wrap_top_search f-left">
+                    <?php echo Mage::app()->getLayout()->createBlock("core/template")->setTemplate("catalogsearch/form.mini.phtml")->toHtml() ?>
+                    <?php //echo Mage::app()->getLayout()->getChildHtml('topSearch'); ?>
+                </div>
+                <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('pupsik_header_moneyback')->toHtml();
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="nav-container">
+        <?php $_helper = Mage::helper('catalog/category');
+        $counter = 1; ?>
+        <?php $_categories = $_helper->getStoreCategories(); ?>
+        <?php $currentCategory = Mage::registry('current_category'); ?>
+        <?php if (count($_categories) > 0): ?>
+            <ul id="navigation"
+                class="marginauto">
+                <li class="main_category first_menu more_padding one_line_name"><a class="link_main_category"
+                                                                     href="<?php echo $this->getUrl('whats-new') ?>">New</a>
+                </li>
+                <?php $i = 0 ?>
+                <?php foreach ($_categories as $_category): ?>
+                    <?php $category2 = Mage::getModel('catalog/category')->load($_category->getId());
+
+                    $use_static_link = $category2->getData('show_sub_categories');
+                    $two_lines_name = $category2->getData('show_two_lines');
+                    $block_for_brand = $category2->getData('static_block_name');
+                    $static_link_category = $category2->getData('static_block_name2');
+                    $block_for_category = $category2->getData('static_block_name3');
+                    $block_for_category2 = $category2->getData('static_block_name4');
+                    ?>
+                    <li class="main_category<?php if ($two_lines_name == 1) {
+                        echo " two_lines_name";
+                    } else {
+                        echo " one_line_name";
+                    } ?>"><a href="<?php if ($use_static_link != 1) {
+                            echo $_helper->getCategoryUrl($_category);
+                        } else {
+                            echo $static_link_category;
+                        } ?>"
+                             class="link_main_category">
+                            <?php echo $_category->getName(); ?>
+                        </a>
+
+                        <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()); ?>
+                        <?php $_subcategories = $_category->getChildrenCategories(); ?>
+                        <?php if (count($_subcategories) > 0): ?>
+                            <div class="overflowclear child_categories  catid<?php echo $_category->getId(); ?>">
+                                <div class="overflowclear bkg_child_category">
+                                    <?php if ($block_for_category != ""): ?>
+                                        <script
+                                            type="text/javascript">
+                                            jQuery(document).ready(function () {
+                                                var total_width1 = 395;
+                                                jQuery(".catid<?php echo $_category->getId() ?>").width(total_width1);
+                                            });
+                                        </script>
+                                        <div class="f-left">
+                                            <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId($block_for_category)->toHtml(); ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($block_for_category2 != ""): ?>
+                                        <div class="f-left">
+                                            <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId($block_for_category2)->toHtml(); ?>   </div>
+                                        <script type="text/javascript">
+                                            jQuery(document).ready(function () {
+                                                var total_width2 = 600;
+                                                jQuery(".catid<?php echo $_category->getId() ?>").width(total_width2);
+                                            });
+                                        </script>
+                                    <?php endif; ?>
+                                    <ul class="f-right">
+                                        <li class="brand"><?php echo $this->__("Shop by brands"); ?></li>
+                                        <?php if ($category2->getData('static_block_name') == "") : ?>
+
+                                        <?php else : ?>
+                                            <div class="brands_static_content overflowclear">
+                                                <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId($block_for_brand)->toHtml(); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <li class="menu_category_image">
+                                            <?php if ($_category->getThumbnail()) : ?>
+                                                <img
+                                                    src="<?php echo Mage::getBaseUrl('media') . 'catalog/category/' . $_category->getThumbnail(); ?>"
+                                                    alt="category_image"/>
+                                            <?php endif; ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </li>
+                    <?php $i++ ?>
+                    <?php $counter++;
+                endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+    <div class="full_static_block overflowclear">
+        <?php echo Mage::app()->getLayout()->createBlock('cms/block')->setBlockId('full_static_block')->toHtml(); ?>
+        <div
+            class="displaynone"><?php echo "Total quantity: " . Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+
+
+            if (Mage::getSingleton('checkout/cart')->getSummaryQty() != "") {
+                $_SESSION['cart_quantity'] = Mage::getSingleton('checkout/cart')->getSummaryQty();
+            }
+
+
+            echo "\n\n Total quantity 2 : " . Mage::getModel('checkout/cart')->getQuote()->getItemsCount();
+            echo "\n\n Total quantity 3 : " . $_SESSION['cart_quantity'];
+            ?></div>
+
+
+    </div>
+</div>

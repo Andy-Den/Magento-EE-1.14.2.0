@@ -1,0 +1,32 @@
+
+<layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <block type="gtbanner/page_html_head" name="gt_gtbanner_head" as="gt_gtbanner_head"/>
+        </reference>
+
+    </default>
+
+    <catalog_category_default>
+        <reference name="bannertop">
+			<block type="gtbanner/content_top" name="gtbanner_content_top" template="gt_gtbanner/content/top.phtml" before="-"/>
+        </reference>
+		<reference name="content">
+			<block type="gtbanner/content_brands" name="gtbanner_content_brands" template="gt_gtbanner/content/brands.phtml" before="-"/>
+        </reference>
+		<reference name="bannerbottom">	
+			<block type="gtbanner/content_bottom" name="gtbanner_content_bottom" template="gt_gtbanner/content/bottom.phtml" after="-"/>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="bannertop">
+			<block type="gtbanner/content_top" name="gtbanner_content_top" template="gt_gtbanner/content/top.phtml" before="-"/>
+        </reference>
+		<reference name="content">
+			<block type="gtbanner/content_brands" name="gtbanner_content_brands" template="gt_gtbanner/content/brands.phtml" before="-"/>
+        </reference>
+		<reference name="bannerbottom">	
+			<block type="gtbanner/content_bottom" name="gtbanner_content_bottom" template="gt_gtbanner/content/bottom.phtml" after="-"/>
+        </reference>
+    </catalog_category_layered>
+</layout>

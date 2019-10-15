@@ -1,0 +1,391 @@
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition End User License Agreement
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magento.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license http://www.magento.com/license/enterprise-edition
+ */
+
+/* Widgets =============================================================================== */
+.widget { display:inline; }
+.widget .widget-title { clear:both; padding:15px 0 0; margin:0 0 7px; }
+.widget .widget-title h2 { font-size:15px; font-weight:bold; color:#e25203; }
+
+.widget .mini-products-images-list .product-image { display:block; width:76px; height:76px; border:1px solid #a9a9a9; margin:0 auto; }
+.widget .mini-products-images-list li.item { float:left; width:77px; height:77px; }
+
+/* Widget: Catalog New Proructs List */
+.widget-new-products { display:block; }
+.col-main .widget-new-products { margin:7px 0; }
+.widget-new-products .products-grid .product-image,
+.widget-new-products .products-list .product-image { width:85px; height:85px; }
+.widget-new-products .products-list .product-shop { margin-left:100px; }
+.sidebar .widget-new-products .block { font-size:11px; line-height:1.25; }
+.sidebar .widget-new-products .block-title strong { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-new.gif) 0 1px no-repeat; padding-left:21px; color:#dc5033; }
+
+/* Widget: Recently Viewed Proructs */
+.widget-viewed { display:block; }
+.col-main .widget-viewed { margin:7px 0; }
+.widget-viewed .products-grid .product-image,
+.widget-viewed .products-list .product-image { width:85px; height:85px; }
+.widget-viewed .products-list .product-shop { margin-left:100px; }
+.sidebar .widget-viewed .block { font-size:11px; line-height:1.25; }
+.sidebar .widget-viewed .block-title strong { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_block-list.gif) 0 0 no-repeat; padding-left:21px; }
+
+/* Widget: Recently Compared Proructs */
+.widget-compared { display:block;}
+.col-main .widget-compared { margin:7px 0; }
+.widget-compared .products-grid .product-image,
+.widget-compared .products-list .product-image { width:85px; height:85px; }
+.widget-compared .products-list .product-shop { margin-left:100px; }
+.sidebar .widget-compared .block { font-size:11px; line-height:1.25; }
+.sidebar .widget-compared .block-title strong { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_block-list.gif) 0 0 no-repeat; padding-left:21px; }
+
+/* Widget: CMS Static Block */
+.widget-static-block {}
+.sidebar .widget-static-block { display:block; margin:0 0 15px; }
+
+/* Widgets: Links Common Styles */
+.top-container .widget a { padding:0 0 0 7px; }
+
+.bottom-container .widget a { padding:0 3px; }
+
+/* Widget: Catalog Product Link */
+.widget-product-link-inline { display:inline; }
+
+.col-main .widget-product-link { display:block; text-align:right; margin:7px 0; }
+.col-main .widget-product-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding-right:15px; }
+
+.sidebar .widget-product-link { display:block; margin:0 0 15px; padding:0 10px; }
+.sidebar .widget-product-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding:0 15px 0 0; }
+
+/* Widget: Catalog Category Link */
+.widget-category-link-inline { display:inline; }
+
+.col-main .widget-category-link { display:block; text-align:right; margin:7px 0; }
+.col-main .widget-category-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding-right:15px; }
+
+.sidebar .widget-category-link { display:block; margin:0 0 15px; padding:0 10px; }
+.sidebar .widget-category-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding:0 15px 0 0; }
+
+/* Widget: CMS Page Link */
+.widget-cms-link-inline { display:inline; }
+
+.col-main .widget-cms-link { display:block; text-align:right; margin:7px 0; }
+.col-main .widget-cms-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding-right:15px; }
+
+.sidebar .widget-cms-link { display:block; margin:0 0 15px; padding:0 10px; }
+.sidebar .widget-cms-link a { background:url(http://pupsik.local/skin/frontend/base/default/css/../images/widgets/i_widget-link.gif) 100% 4px no-repeat; padding:0 15px 0 0; }
+/* ======================================================================================= */
+
+#extabs span#tb4 {
+	width: 100px;
+}
+div#noticeevents {
+	border: 1px solid #999;
+	background-color: #FFF;
+	height: 100px;
+	overflow: auto;
+}
+div#noticeevents div {
+	border-bottom: 1px dotted #DDD;
+	padding: 3px;
+	margin: 0px;
+}
+.runner {
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	float: right;
+	font-size: .8em;
+	background-color: #333;
+	color: #FFF;
+	padding: 2px 10px 5px 10px;
+	cursor: pointer;
+}
+
+
+/** Growler Notice Custom Styling **/
+div.Growler-notice {
+	background-color: 		#000;
+	color: 					#fff;
+	opacity: 				.85;
+	filter: 				alpha(opacity = 85);
+	zoom: 					1;
+	width: 					235px;
+	padding: 				10px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	margin-left: 			auto;
+	margin-right: 			auto;
+	font-family: 			Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 				12px;
+	text-align: 			left;
+	display: 				none;
+	-moz-border-radius: 	5px;
+	-webkit-border-radius:	5px;
+	min-height: 			40px;
+    z-index:                10000;
+}
+
+div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+}
+
+div.Growler-notice-exit {
+	float: 					right;
+	font-weight: 			bold;
+	font-size: 				12px;
+	cursor:					pointer;
+}
+
+/** Plain Theme **/
+div.plain {
+	color: 					#000;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background-color: 		#EDEDED;
+	border: 				1px solid #777;
+}
+
+div.plain div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+	padding: 				2px 10px;
+}
+
+div.plain div.Growler-notice-exit {
+	float: 					right;
+	cursor:					pointer;
+	margin: 				0px;
+	padding: 				0px 0px 2px 2px;
+	width: 					10px;
+	height: 				10px;
+	color: 					#BFBFBF;
+}
+div.plain div.Growler-notice-body {
+	padding: 5px;
+}
+
+
+/** Mac OS X Theme **/
+div.macosx {
+	color: 					#000;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background: #d7d7d7 url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/macosx.jpg) repeat-y 0;
+	border: 				1px solid #C9C9C9;
+}
+
+div.macosx div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+	padding: 				5px 10px;
+}
+
+div.macosx div.Growler-notice-exit {
+	width: 					15px;
+	height: 				15px;
+	float: 					left;
+	cursor:					pointer;
+	margin: 				4px;
+	margin-left: 			1px;
+	font-size: 				0em;
+	color: 					transparent;
+	background: transparent url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/macosx_exit.png) no-repeat left 0;
+}
+div.macosx div.Growler-notice-exit:hover {
+	background: transparent url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/macosx_exit_over.png) no-repeat left 0;
+}
+div.macosx div.Growler-notice-body {
+	padding: 2px 0 10px 25px;
+}
+
+/** Candybars Theme **/
+div.candybar {
+	color: 					#000;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background-color: 		#F5F7FA;
+	border: 				1px solid #19304B;
+}
+
+div.candybar div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				10px;
+	background: 			url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/candybars.jpg) repeat-x;
+	padding: 				5px 10px;
+}
+
+div.candybar div.Growler-notice-exit {
+	float: 					right;
+	cursor:					pointer;
+	margin: 				3px;
+}
+div.candybar div.Growler-notice-body {
+	border-top: 1px solid #999;
+	padding: 10px;
+}
+
+/** Construction Theme **/
+div.atwork {
+	color: 					#FFF;
+	width: 					253px;
+	margin-top: 			5px;
+	margin-bottom: 			5px;
+	text-align: 			left;
+	display: 				none;
+	min-height: 			40px;
+	background: 			#4d4d4d url(http://pupsik.local/skin/frontend/base/default/ajaxcart/../images/atwork.png) repeat-y 0;
+	border: 				1px solid #222;
+}
+
+div.atwork div.Growler-notice-head {
+	font-weight: 			bold;
+	font-size:				12px;
+	padding: 				5px 20px;
+	color: 					#efca23;
+	
+}
+
+div.atwork div.Growler-notice-exit {
+	float: 					right;
+	cursor:					pointer;
+	margin: 				3px;
+}
+div.atwork div.Growler-notice-body {
+	padding: 2px 0 10px 25px;
+}
+
+
+#MB_overlay {
+	position: absolute;
+	margin: auto;
+	top: 0;	left: 0;
+	width: 100%; height: 100%;
+	z-index: 9999;
+	border: 0;
+	background-color: #000!important;
+}
+#MB_overlay[id] { position: fixed; }
+
+#MB_window {
+	position: absolute;
+	top: 0;
+	border: 0 solid;
+	text-align: left;
+	z-index: 10000;
+}
+#MB_window[id] { position: fixed!important; }
+
+#MB_frame {
+	position: relative;
+	background-color: #EFEFEF;
+	height: 100%;
+}
+
+#MB_header {
+	margin: 0;
+	padding: 0;
+}
+
+#MB_content {
+	position: relative;
+	padding: 6px .75em;
+	overflow: auto;
+}
+
+#MB_caption {
+	font: bold 100% "Lucida Grande", Arial, sans-serif;
+	text-shadow: #FFF 0 1px 0;
+	padding: .5em 2em .5em .75em;
+	margin: 0;
+	text-align: left;
+}
+
+#MB_close {
+	display: block;
+	position: absolute;
+	right: 5px; top: 4px;
+	padding: 2px 3px;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 13px;
+}
+#MB_close:hover {
+	background: transparent;
+}
+
+#MB_loading {
+	padding: 1.5em;
+	text-indent: -10000px;
+	background: transparent url(http://pupsik.local/skin/frontend/base/default/ajaxcart/spinner.gif) 50% 0 no-repeat;
+}
+
+/* Color scheme */
+#MB_window {
+	background-color: #EFEFEF;
+	color: #000;
+	
+	-webkit-box-shadow: 0 0 64px #000; 
+	-moz-box-shadow: #000 0 0 64px; 
+	box-shadow: 0 0 64px #000;
+}
+	#MB_frame {
+		padding-bottom: 4px;
+		
+		-webkit-border-bottom-left-radius: 4px;
+		-webkit-border-bottom-right-radius: 4px;
+
+		-moz-border-radius-bottomleft: 4px;
+		-moz-border-radius-bottomright: 4px;
+
+		border-bottom-left-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
+	
+	#MB_content { border-top: 1px solid #F9F9F9; }
+
+	#MB_header {
+	  background-color: #DDD;
+	  border-bottom: 1px solid #CCC;
+	}
+		#MB_caption { color: #000 }
+		#MB_close { color: #777 }
+		#MB_close:hover { color: #000 }
+
+
+/* Alert message */
+.MB_alert {
+	margin: 10px 0;
+	text-align: center;
+}

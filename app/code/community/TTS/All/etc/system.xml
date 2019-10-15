@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <tts translate="label" module="ttsall">
+            <label>Gento Tech </label>
+            <sort_order>300</sort_order>
+        </tts>
+    </tabs>
+       
+    <sections>
+        <!--<ttsall translate="label">-->
+            <!--<label>General</label>-->
+            <!--<tab>tts</tab>-->
+            <!--<frontend_type>text</frontend_type>-->
+            <!--<sort_order>777</sort_order>-->
+            <!--<show_in_default>1</show_in_default>-->
+            <!--<show_in_website>1</show_in_website>-->
+            <!--<show_in_store>1</show_in_store>-->
+            <!--<groups>-->
+                <!--<extensions translate="label">-->
+                    <!--<label>Installed Extensions</label>-->
+                    <!--<frontend_type>text</frontend_type>-->
+                    <!--<frontend_model>ttsall/extensions</frontend_model>-->
+                    <!--<sort_order>2</sort_order>-->
+                    <!--<show_in_default>1</show_in_default>-->
+                    <!--<show_in_website>1</show_in_website>-->
+                    <!--<show_in_store>1</show_in_store>-->
+                <!--</extensions>-->
+                <!--<feed>-->
+                    <!--<label>Notifications</label>-->
+                    <!--<frontend_type>text</frontend_type>-->
+                    <!--<sort_order>90</sort_order>-->
+                    <!--<show_in_default>1</show_in_default>-->
+                    <!--<show_in_website>1</show_in_website>-->
+                    <!--<show_in_store>1</show_in_store>-->
+                    <!--<fields>-->
+                        <!--<interests translate="label">-->
+                            <!--<label>I'd like to be informed by TTS Tech about:</label>-->
+                            <!--<comment></comment>-->
+                            <!--<frontend_type>multiselect</frontend_type>-->
+                            <!--<sort_order>100</sort_order>-->
+                            <!--<show_in_default>1</show_in_default>-->
+                            <!--<show_in_website>1</show_in_website>-->
+                            <!--<show_in_store>1</show_in_store>-->
+                            <!--<can_be_empty>1</can_be_empty>-->
+                            <!--<source_model>ttsall/source_updates_type</source_model>-->
+                        <!--</interests>	-->
+                    <!--</fields>	-->
+                <!--</feed>		-->
+            <!--</groups>-->
+        <!--</ttsall>-->
+    </sections>
+</config>

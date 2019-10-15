@@ -1,0 +1,1 @@
+[17-Oct-2014 10:39:26 UTC] PHP Fatal error:  Call to a member function getMethodInstance() on a non-object in /home/pupsik/public_html/app/code/core/Mage/Payment/Model/Observer.php on line 46

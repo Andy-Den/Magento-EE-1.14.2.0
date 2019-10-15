@@ -1,0 +1,7 @@
+<?php $_product = $this->getProduct(); ?>
+<!-- brand -->
+<?php if($_product->getBrands()):?>
+	<?php $brands = $this->helper('brands/data')?>
+	<a href="<?php echo $brands->getBrandUrlById($_product->getBrands())?>"><img src="<?php echo $brands->getImageUrlById($_product->getBrands()) ?>" /></a>
+<?php endif?>
+<!-- brand -->

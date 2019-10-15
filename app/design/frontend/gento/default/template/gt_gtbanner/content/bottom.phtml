@@ -1,0 +1,18 @@
+<?php $collection = $this->_getCollection(); ?>
+<?php if (count($collection) > 0) : ?>
+<ul class="overflowclear reset_all">
+		<?php foreach ($collection as $item) : ?>
+			<?php $_imageList = $item->getImageList(); ?>
+			<?php if (is_array($_imageList) and sizeof($_imageList) > 0) : ?>
+				<?php $counter=1; foreach ($_imageList as &$_item) : ?>
+                <li<?php if($counter%3==0): ?> class="no-margin"<?php endif; ?>>
+
+					<a href="<?php echo $_item['label']; ?>" target="_blank">
+                        <img src="<?php echo $this->helper('gtbanner/image')->init($_item['file'])->constrainOnly(TRUE)->keepAspectRatio(FALSE)->keepFrame(TRUE)->resize(315,124); ?>" alt="banner" width="315" height="124" />
+                    </a>
+                </li>
+				<?php $counter++; endforeach; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
+</ul>
+<?php endif; ?>

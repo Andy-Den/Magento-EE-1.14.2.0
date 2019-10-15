@@ -1,0 +1,13 @@
+<?php if (Mage::helper('newslettercheckbox')->isEnabled() && $this->hideIfSubscribed() && $this->showToUser()): ?>
+    <li class="control newslettercheckbox">
+        <div>
+            <input type="checkbox" class="checkbox" name="billing[subscribed]" value="1"
+                    title="<?php echo Mage::helper('newslettercheckbox')->getCheckboxLabel(); ?>"
+                    id="billing:subscribed"<?php echo (Mage::helper('newslettercheckbox')->isCheckedByDefault()) ? ' checked="checked"' : '' ?> />
+            <label for="billing:subscribed" style="display: inline; vertical-align: bottom;">
+               <?php $subscribed_text = $this->getLayout()->createBlock('cms/block')->setBlockId('pupsik_newsletter')->toHtml();
+               echo strip_tags($subscribed_text); ?>
+            </label>
+        </div>
+    </li>
+<?php endif ?>

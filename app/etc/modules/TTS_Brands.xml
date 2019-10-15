@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TTS_Brands>
+            <active>true</active>
+            <codePool>community</codePool>
+			<version>1.1.0</version>
+        </TTS_Brands>
+    </modules>
+</config>
